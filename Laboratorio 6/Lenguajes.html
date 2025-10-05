@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Preferencias de Lenguajes</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <header>
+    <h1>Preferencias de Lenguajes</h1>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="registro.html">Suscripción</a></li>
+        <li><a href="lenguajes.html" aria-current="page">Lenguajes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>Formulario de preferencias</h2>
+
+      <!-- Foto de perfil (reemplaza el src por tu archivo real) -->
+      <figure>
+        <img src="perfil.jpg" alt="Foto de perfil del usuario" width="180" height="180">
+        <figcaption>Tu foto de perfil</figcaption>
+      </figure>
+
+      <!-- Reemplaza action con tu endpoint si corresponde -->
+      <form action="/guardar-preferencias" method="post">
+        <fieldset>
+          <legend>¿Qué lenguajes conoces?</legend>
+
+          <div>
+            <input id="lang-html" name="lenguajes" type="checkbox" value="HTML">
+            <label for="lang-html">HTML</label>
+          </div>
+
+          <div>
+            <input id="lang-css" name="lenguajes" type="checkbox" value="CSS">
+            <label for="lang-css">CSS</label>
+          </div>
+
+          <div>
+            <input id="lang-js" name="lenguajes" type="checkbox" value="JavaScript">
+            <label for="lang-js">JavaScript</label>
+          </div>
+
+          <div>
+            <input id="lang-py" name="lenguajes" type="checkbox" value="Python">
+            <label for="lang-py">Python</label>
+          </div>
+
+          <div>
+            <input id="lang-java" name="lenguajes" type="checkbox" value="Java">
+            <label for="lang-java">Java</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Hábitos de estudio</legend>
+          <label for="horas">¿Cuántas horas de programación estudias al día?</label>
+          <input
+            id="horas"
+            name="horas_dia"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            max="24"
+            step="0.5"
+            required
+          >
+        </fieldset>
+
+        <p>
+          <button type="submit">Guardar</button>
+        </p>
+      </form>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 — Mi Sitio</p>
+  </footer>
+</body>
+</html>
