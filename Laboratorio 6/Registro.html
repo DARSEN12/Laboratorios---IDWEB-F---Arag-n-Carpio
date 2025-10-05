@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Suscripción al boletín</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <header>
+    <h1>Mi Sitio</h1>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="registro.html" aria-current="page">Suscripción</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>Suscríbete al boletín</h2>
+      <p>Completa el formulario. El consentimiento promocional es opcional.</p>
+
+      <!-- Reemplaza action con tu endpoint real si corresponde -->
+      <form action="/suscribir" method="post">
+        <fieldset>
+          <legend>Datos de contacto</legend>
+
+          <div>
+            <label for="nombre">Nombre completo:</label>
+            <input id="nombre" name="nombre" type="text" required minlength="3" maxlength="80" autocomplete="name">
+          </div>
+
+          <div>
+            <label for="correo">Correo electrónico:</label>
+            <input id="correo" name="correo" type="email" required autocomplete="email" inputmode="email">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Preferencias</legend>
+          <div>
+            <input id="promos" name="promos" type="checkbox">
+            <label for="promos">Acepto recibir correos promocionales</label>
+          </div>
+        </fieldset>
+
+        <p>
+          <button type="submit">Suscribirme</button>
+          <input type="reset" value="Resetear formulario">
+        </p>
+      </form>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 — Mi Sitio</p>
+  </footer>
+</body>
+</html>
