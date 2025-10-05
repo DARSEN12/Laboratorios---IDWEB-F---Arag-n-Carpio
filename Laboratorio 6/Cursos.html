@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Inscripción a cursos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <header>
+    <h1>Inscripción a cursos</h1>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="registro.html">Suscripción</a></li>
+        <li><a href="lenguajes.html">Lenguajes</a></li>
+        <li><a href="validacion.html">Validación</a></li>
+        <li><a href="cursos.html" aria-current="page">Cursos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>Formulario de inscripción</h2>
+
+      <!-- Reemplaza action con tu endpoint real si corresponde -->
+      <form action="/inscribir-curso" method="post">
+        <fieldset>
+          <legend>Datos personales</legend>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" name="nombre" type="text" required autocomplete="given-name" minlength="2" maxlength="60" placeholder="Tu nombre">
+          </div>
+
+          <div>
+            <label for="apellido">Apellido:</label>
+            <input id="apellido" name="apellido" type="text" required autocomplete="family-name" minlength="2" maxlength="60" placeholder="Tu apellido">
+          </div>
+
+          <div>
+            <label for="dni">Documento de identidad:</label>
+            <input id="dni" name="dni" type="text" required placeholder="Ej. 12345678"
+                   inputmode="numeric" pattern="[0-9]{6,12}" title="Ingrese entre 6 y 12 dígitos numéricos.">
+          </div>
+
+          <div>
+            <label for="correo">Correo electrónico:</label>
+            <input id="correo" name="correo" type="email" required autocomplete="email" placeholder="usuario@dominio.com" inputmode="email">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Detalle del curso</legend>
+
+          <!-- Selección de curso (3 opciones) -->
+          <div>
+            <label for="curso">Curso:</label>
+            <select id="curso" name="curso" required>
+              <option value="" selected disabled>Seleccione un curso</option>
+              <option value="frontend">Desarrollo Frontend</option>
+              <option value="backend">Desarrollo Backend</option>
+              <option value="data">Fundamentos de Ciencia de Datos</option>
+            </select>
+          </div>
+
+          <!-- Modalidad (solo una) -->
+          <fieldset>
+            <legend>Modalidad</legend>
+            <div>
+              <input id="mod-presencial" name="modalidad" type="radio" value="presencial" required>
+              <label for="mod-presencial">Presencial</label>
+            </div>
+            <div>
+              <input id="mod-virtual" name="modalidad" type="radio" value="virtual">
+              <label for="mod-virtual">Virtual</label>
+            </div>
+          </fieldset>
+
+          <!-- Horarios disponibles (varios) -->
+          <fieldset>
+            <legend>Horarios disponibles</legend>
+            <div>
+              <input id="h-manana" name="horarios" type="checkbox" value="manana">
+              <label for="h-manana">Mañana</label>
+            </div>
+            <div>
+              <input id="h-tarde" name="horarios" type="checkbox" value="tarde">
+              <label for="h-tarde">Tarde</label>
+            </div>
+            <div>
+              <input id="h-noche" name="horarios" type="checkbox" value="noche">
+              <label for="h-noche">Noche</label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- Comentarios adicionales -->
+        <fieldset>
+          <legend>Comentarios adicionales</legend>
+          <label for="comentarios" class="sr-only">Comentarios adicionales</label>
+          <textarea id="comentarios" name="comentarios" rows="4" placeholder="Indica necesidades específicas, disponibilidad, etc."></textarea>
+        </fieldset>
+
+        <p>
+          <button type="submit">Enviar</button>
+          <input type="reset" value="Restablecer">
+        </p>
+      </form>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 — Mi Sitio</p>
+  </footer>
+</body>
+</html>
