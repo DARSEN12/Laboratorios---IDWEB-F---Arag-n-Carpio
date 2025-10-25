@@ -15,6 +15,13 @@
         h1 {
             color: #333;
         }
+        h2 {
+            color: #007BFF;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #555;
+        }
         .container {
             display: flex;
             justify-content: space-around;
@@ -26,7 +33,7 @@
             padding: 20px;
             margin: 10px;
             border-radius: 8px;
-            width: 200px;
+            width: 250px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .card a {
@@ -37,38 +44,69 @@
         .card a:hover {
             color: #0056b3;
         }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .about-section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Página de Enlaces</h1>
-    <p>Haz clic en los enlaces de abajo para acceder a las páginas correspondientes.</p>
+    <h1>Bienvenido a la Página de Ejercicios Web</h1>
+    <p>En esta página encontrarás enlaces a diversos ejercicios prácticos relacionados con el desarrollo web utilizando CSS, Flexbox y Grid. Haz clic en los enlaces para explorar cada ejercicio.</p>
+
+    <div class="about-section">
+        <h2>Acerca de los Ejercicios</h2>
+        <p>Este conjunto de ejercicios está diseñado para familiarizarte con conceptos clave de diseño web. A través de estos ejercicios aprenderás:</p>
+        <ul style="text-align: left; margin-left: 20px;">
+            <li>El modelo de cajas (box model) y cómo se utiliza con Flexbox.</li>
+            <li>El uso de CSS Grid para crear layouts de múltiples columnas.</li>
+            <li>El diseño de interfaces responsivas para dispositivos móviles.</li>
+            <li>La organización de contenido en un dashboard con sidebar.</li>
+            <li>Y mucho más...</li>
+        </ul>
+    </div>
+
+    <h2>Enlaces a los Ejercicios</h2>
+    <p>Haz clic en los enlaces de abajo para acceder a las páginas correspondientes y comenzar con los ejercicios.</p>
 
     <div class="container">
         <div class="card">
-            <h2>boxmodel.html</h2>
+            <h3>boxmodel.html</h3>
             <p>Explora el modelo de cajas y Flexbox aplicando márgenes, bordes y padding a varias tarjetas.</p>
             <a href="boxmodel.html" target="_blank">Ver Página</a>
         </div>
         <div class="card">
-            <h2>gridflex.html</h2>
+            <h3>gridflex.html</h3>
             <p>Crea la estructura de un blog con Grid y Flexbox para organizar los artículos de forma responsiva.</p>
             <a href="gridflex.html" target="_blank">Ver Página</a>
         </div>
         <div class="card">
-            <h2>imágenes.html</h2>
+            <h3>imágenes.html</h3>
             <p>Una galería de imágenes con un diseño responsive usando CSS Grid y box-sizing.</p>
             <a href="imágenes.html" target="_blank">Ver Página</a>
         </div>
         <div class="card">
-            <h2>dashboard.html</h2>
+            <h3>dashboard.html</h3>
             <p>Diseño tipo panel de administración con Grid para el sidebar y Flexbox para las tarjetas de estadísticas.</p>
             <a href="dashboard.html" target="_blank">Ver Página</a>
         </div>
         <div class="card">
-            <h2>landingpage.html</h2>
+            <h3>landingpage.html</h3>
             <p>Crea una landing page básica utilizando Grid y Flexbox para la sección hero y demás contenidos.</p>
             <a href="landingpage.html" target="_blank">Ver Página</a>
         </div>
     </div>
+
+    <footer>
+        <p>Desarrollado por: <strong>Aragón Fredy</strong> | 2025</p>
+        <p>Este proyecto fue realizado como parte del curso de Introducción al Desarrollo Web. Para más información, contacta al instructor del curso.</p>
+    </footer>
 </body>
 </html>
