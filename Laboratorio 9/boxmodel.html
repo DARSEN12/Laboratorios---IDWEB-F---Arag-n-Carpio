@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boxmodel.html</title>
+    <style>
+        .tarjeta {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 2px solid #007BFF;
+            margin: 10px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            width: 200px;
+        }
+        .contenedor {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uso del Modelo de Cajas y Flexbox</h1>
+    <div class="contenedor">
+        <div class="tarjeta">Tarjeta 1</div>
+        <div class="tarjeta">Tarjeta 2</div>
+        <div class="tarjeta">Tarjeta 3</div>
+    </div>
+</body>
+</html>
