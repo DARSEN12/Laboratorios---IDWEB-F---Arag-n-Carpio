@@ -4,15 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a DevSolutions - Agencia de Desarrollo de Software</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #007BFF, #00c6ff);
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 50px 0;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            color: #ff9900;
+        }
+
+        .container {
+            padding: 50px 20px;
+        }
+
+        .intro {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .cta-buttons a {
+            padding: 15px 30px;
+            background-color: #ff9900;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-buttons a:hover {
+            background-color: #e68a00;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-buttons a {
+                width: 100%;
+                padding: 15px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
         <h1>Bienvenidos a DevSolutions</h1>
-        <p>Agencia de Desarrollo de Software</p>
+        <p>Tu agencia de desarrollo de software, innovación y soluciones digitales</p>
     </header>
 
+    <!-- Navigation Bar -->
     <nav>
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Servicios</a>
@@ -21,18 +137,19 @@
         <a href="contacto.html">Contacto</a>
     </nav>
 
+    <!-- Main Content -->
     <div class="container">
-        <h2>¿Quiénes somos?</h2>
-        <p class="intro">En <strong>DevSolutions</strong> nos especializamos en brindar soluciones de software personalizadas para empresas de todos los tamaños. Desde desarrollo web hasta aplicaciones móviles, ofrecemos un servicio integral para hacer crecer tu negocio.</p>
+        <h2>Transformamos tu negocio con tecnología</h2>
+        <p class="intro">En DevSolutions nos especializamos en ofrecer soluciones tecnológicas a medida para ayudarte a alcanzar el éxito. Ya sea desarrollando una página web, una aplicación móvil o realizando una consultoría tecnológica, estamos aquí para ayudarte a crecer.</p>
 
-        <h3>Explora nuestros servicios:</h3>
-        <ul>
-            <li><a href="servicios.html">Desarrollo Web</a></li>
-            <li><a href="servicios.html">Aplicaciones Móviles</a></li>
-            <li><a href="servicios.html">Consultoría IT</a></li>
-        </ul>
+        <!-- Call to Action Buttons -->
+        <div class="cta-buttons">
+            <a href="servicios.html">Nuestros Servicios</a>
+            <a href="contacto.html">Contáctanos</a>
+        </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 DevSolutions. Todos los derechos reservados.</p>
     </footer>
