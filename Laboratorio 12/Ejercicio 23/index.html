@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función potencia (recursiva)</title>
+</head>
+<body>
+  <h1>potencia(base, exponente)</h1>
+  <p>Recursiva, sin <code>**</code> ni <code>Math.pow</code>. Soporta exponentes enteros (negativos, cero y positivos).</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="base" type="text" placeholder="Base">
+  <input id="exp" type="text" placeholder="Exponente (entero)">
+  <button id="probar">Calcular</button>
+  <p id="out"></p>
+
+  <!-- Implementación -->
+  <script src="Ejercicio_23.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Casos de ejemplo [base, exponente]
+    const casos = [
+      [2, 0],   // 1
+      [2, 5],   // 32
+      [5, 3],   // 125
+      [3, -2],  // 1/9
+      [-2, 3],  // -8
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([b, e]) => {
+      const li = document.createElement('li');
+      li.textContent = `potencia(${b}, ${e}) = ${potencia(b, e)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const b = Number(document.getElementById('base').value);
+      const eRaw = Number(document.getElementById('exp').value);
+      const out = document.getElementById('out');
+
+      if (!Number.isFinite(b) || !Number.isFinite(eRaw) || !Number.isInteger(eRaw)) {
+        out.textContent = 'Base debe ser número finito y exponente entero.';
+        return;
+      }
+      out.textContent = `Resultado: ${potencia(b, eRaw)}`;
+    });
+  </script>
+</body>
+</html>

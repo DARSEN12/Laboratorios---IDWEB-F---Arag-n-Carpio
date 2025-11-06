@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función descargarArchivo (simulación async)</title>
+</head>
+<body>
+  <h1>descargarArchivo(url, callback)</h1>
+  <p>Muestra "Descargando..." y luego ejecuta el callback con "Descarga completa de [url]".</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="url" type="text" placeholder="https://ejemplo.com/archivo.zip" style="width:360px">
+  <button id="probar">Descargar</button>
+  <pre id="out"></pre>
+
+  <!-- Implementación -->
+  <script src="Ejercicio_22.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    const ul = document.getElementById('ejemplos');
+
+    // Helper para pintar líneas
+    const addLine = (where, text) => {
+      if (where === 'ul') {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      } else {
+        const out = document.getElementById('out');
+        out.textContent += text + '\n';
+      }
+    };
+
+    // Ejemplos fijos
+    descargarArchivo('https://server.com/a.pdf', (msg) => addLine('ul', msg));
+    descargarArchivo('https://server.com/b.png', (msg) => addLine('ul', msg));
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const u = document.getElementById('url').value.trim();
+      const out = document.getElementById('out');
+      out.textContent = ''; // limpiar salida
+
+      if (!u) {
+        out.textContent = 'Ingresa una URL.';
+        return;
+      }
+
+      const onDone = (mensaje) => addLine('out', mensaje);
+      const status = descargarArchivo(u, onDone);
+      // 'status' devuelve el texto "Descargando..." inmediatamente
+      addLine('out', status);
+    });
+  </script>
+</body>
+</html>

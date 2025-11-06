@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función esPar</title>
+</head>
+<body>
+  <h1>Función esPar(num)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="n" type="text" placeholder="Número">
+  <button id="probar">Probar</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_3.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Pintar algunos ejemplos fijos
+    const casos = [4, 7, -2, 0, 2.5];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(c => {
+      const li = document.createElement('li');
+      li.textContent = `esPar(${c}) = ${esPar(c)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const v = Number(document.getElementById('n').value);
+      if (Number.isNaN(v)) {
+        document.getElementById('out').textContent = 'Ingresa un número válido.';
+        return;
+      }
+      document.getElementById('out').textContent = `esPar(${v}) = ${esPar(v)}`;
+    });
+  </script>
+</body>
+</html>

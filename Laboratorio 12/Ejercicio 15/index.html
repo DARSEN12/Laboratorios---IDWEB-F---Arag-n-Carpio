@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función crearContador (closure)</title>
+</head>
+<body>
+  <h1>crearContador(valorInicial)</h1>
+  <p>Devuelve funciones <code>incrementar()</code> y <code>resetear()</code> que operan sobre un estado interno.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="ini" type="text" placeholder="Valor inicial (por defecto 0)">
+  <button id="crear">Crear contador</button>
+  <button id="inc" disabled>Incrementar</button>
+  <button id="res" disabled>Resetear</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_15.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Ejemplos fijos
+    const c1 = crearContador(5);
+    const c2 = crearContador(0);
+
+    const ul = document.getElementById('ejemplos');
+    const e1 = [];
+    e1.push(c1.incrementar()); // 6
+    e1.push(c1.incrementar()); // 7
+    e1.push(c1.resetear());    // 5
+    e1.push(c1.incrementar()); // 6
+
+    const e2 = [];
+    e2.push(c2.incrementar()); // 1
+    e2.push(c2.incrementar()); // 2
+    e2.push(c2.resetear());    // 0
+
+    const li1 = document.createElement('li');
+    li1.textContent = `c1 (inicio 5) → ${e1.join(', ')}`;
+    const li2 = document.createElement('li');
+    li2.textContent = `c2 (inicio 0) → ${e2.join(', ')}`;
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+
+    // Probador manual con UI
+    let contador = null;
+
+    document.getElementById('crear').addEventListener('click', () => {
+      const v = document.getElementById('ini').value.trim();
+      const inicial = v === '' ? undefined : Number(v);
+      if (v !== '' && Number.isNaN(inicial)) {
+        document.getElementById('out').textContent = 'Ingresa un número válido o deja vacío para 0.';
+        return;
+      }
+      contador = crearContador(inicial);
+      document.getElementById('inc').disabled = false;
+      document.getElementById('res').disabled = false;
+      document.getElementById('out').textContent = 'Contador creado.';
+    });
+
+    document.getElementById('inc').addEventListener('click', () => {
+      if (!contador) return;
+      const r = contador.incrementar();
+      document.getElementById('out').textContent = `incrementar() → ${r}`;
+    });
+
+    document.getElementById('res').addEventListener('click', () => {
+      if (!contador) return;
+      const r = contador.resetear();
+      document.getElementById('out').textContent = `resetear() → ${r}`;
+    });
+  </script>
+</body>
+</html>

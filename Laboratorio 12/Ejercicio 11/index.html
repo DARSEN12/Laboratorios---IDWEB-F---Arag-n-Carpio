@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función esPositivo (flecha)</title>
+</head>
+<body>
+  <h1>Función esPositivo(n)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="n" type="text" placeholder="Número">
+  <button id="probar">Probar</button>
+  <p id="out"></p>
+
+  <!-- Tu función (flecha) -->
+  <script src="Ejercicio_11.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos
+    const casos = [3, 0, -1, 2.5, -0.0001];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(c => {
+      const li = document.createElement('li');
+      li.textContent = `esPositivo(${c}) = ${esPositivo(c)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const v = Number(document.getElementById('n').value);
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(v)) {
+        out.textContent = 'Ingresa un número válido.';
+        return;
+      }
+      out.textContent = `esPositivo(${v}) = ${esPositivo(v)}`;
+    });
+  </script>
+</body>
+</html>

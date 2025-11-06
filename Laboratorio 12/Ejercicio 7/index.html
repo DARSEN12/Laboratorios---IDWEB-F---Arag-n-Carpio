@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función promedio (expresada)</title>
+</head>
+<body>
+  <h1>Función promedio(n1, n2, n3)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="n1" type="text" placeholder="Nota 1">
+  <input id="n2" type="text" placeholder="Nota 2">
+  <input id="n3" type="text" placeholder="Nota 3">
+  <button id="probar">Calcular</button>
+  <p id="out"></p>
+
+  <!-- Tu función (expresada) -->
+  <script src="Ejercicio_7.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos [n1, n2, n3]
+    const casos = [
+      [10, 12, 14],
+      [20, 18, 19],
+      [0, 0, 0],
+      [13.5, 15, 14.5]
+    ];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([a, b, c]) => {
+      const li = document.createElement('li');
+      li.textContent = `promedio(${a}, ${b}, ${c}) = ${promedio(a, b, c)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const a = Number(document.getElementById('n1').value);
+      const b = Number(document.getElementById('n2').value);
+      const c = Number(document.getElementById('n3').value);
+      const out = document.getElementById('out');
+
+      if ([a, b, c].some(Number.isNaN)) {
+        out.textContent = 'Ingresa números válidos para las 3 notas.';
+        return;
+      }
+      out.textContent = `promedio(${a}, ${b}, ${c}) = ${promedio(a, b, c)}`;
+    });
+  </script>
+</body>
+</html>

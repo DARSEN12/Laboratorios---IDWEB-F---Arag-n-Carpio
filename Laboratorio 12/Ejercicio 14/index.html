@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>operacionesMatematicas (closures + flecha)</title>
+</head>
+<body>
+  <h1>operacionesMatematicas()</h1>
+  <p>Devuelve un objeto con: <code>sumar</code>, <code>restar</code>, <code>multiplicar</code>, <code>dividir</code>.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="a" type="text" placeholder="a">
+  <input id="b" type="text" placeholder="b">
+  <select id="op">
+    <option value="sumar">sumar</option>
+    <option value="restar">restar</option>
+    <option value="multiplicar">multiplicar</option>
+    <option value="dividir">dividir</option>
+  </select>
+  <button id="probar">Ejecutar</button>
+  <p id="out"></p>
+
+  <!-- Función principal -->
+  <script src="Ejercicio_14.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    const ops = operacionesMatematicas();
+
+    // Ejemplos fijos
+    const casos = [
+      ['sumar', 5, 2],
+      ['restar', 5, 2],
+      ['multiplicar', 5, 2],
+      ['dividir', 10, 2],
+    ];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([fn, x, y]) => {
+      const li = document.createElement('li');
+      li.textContent = `${fn}(${x}, ${y}) = ${ops[fn](x, y)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const x = Number(document.getElementById('a').value);
+      const y = Number(document.getElementById('b').value);
+      const fn = document.getElementById('op').value;
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(x) || Number.isNaN(y)) {
+        out.textContent = 'Ingresa números válidos para a y b.';
+        return;
+      }
+      try {
+        out.textContent = `${fn}(${x}, ${y}) = ${ops[fn](x, y)}`;
+      } catch (e) {
+        out.textContent = e.message;
+      }
+    });
+  </script>
+</body>
+</html>

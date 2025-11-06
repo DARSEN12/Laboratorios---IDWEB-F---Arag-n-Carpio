@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función componerTransformaciones (flecha)</title>
+</head>
+<body>
+  <h1>componerTransformaciones(f1, f2)</h1>
+  <p>Aplica primero <code>mayusculas</code> y luego <code>agregarSigno</code>.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="txt" type="text" placeholder="Escribe un texto">
+  <button id="probar">Transformar</button>
+  <p id="out"></p>
+
+  <!-- Funciones -->
+  <script src="Ejercicio_12.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Ejemplos fijos
+    const casos = ['hola', 'mundo 123', '', 'ñandú'];
+    const ul = document.getElementById('ejemplos');
+
+    casos.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = `transformar("${t}") = "${transformar(t)}"`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const t = document.getElementById('txt').value;
+      document.getElementById('out').textContent = transformar(t);
+    });
+
+    // Ejemplo en consola:
+    // console.log(transformar("hola")); // "HOLA!"
+  </script>
+</body>
+</html>

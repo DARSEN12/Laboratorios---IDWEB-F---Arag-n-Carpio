@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función mayorDeTres</title>
+</head>
+<body>
+  <h1>Función mayorDeTres(a, b, c)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="a" type="text" placeholder="a">
+  <input id="b" type="text" placeholder="b">
+  <input id="c" type="text" placeholder="c">
+  <button id="probar">Probar</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_6.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos [a, b, c]
+    const casos = [
+      [3, 7, 5],
+      [-1, -5, -3],
+      [10, 10, 2],
+      [0, 0, 0],
+      [2.5, 2.7, 2.6]
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([x, y, z]) => {
+      const li = document.createElement('li');
+      li.textContent = `mayorDeTres(${x}, ${y}, ${z}) = ${mayorDeTres(x, y, z)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const x = Number(document.getElementById('a').value);
+      const y = Number(document.getElementById('b').value);
+      const z = Number(document.getElementById('c').value);
+      const out = document.getElementById('out');
+
+      if ([x, y, z].some(Number.isNaN)) {
+        out.textContent = 'Ingresa números válidos para a, b y c.';
+        return;
+      }
+      out.textContent = `mayorDeTres(${x}, ${y}, ${z}) = ${mayorDeTres(x, y, z)}`;
+    });
+  </script>
+</body>
+</html>

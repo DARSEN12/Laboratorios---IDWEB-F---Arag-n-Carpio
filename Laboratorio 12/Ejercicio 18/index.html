@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función media (rest)</title>
+</head>
+<body>
+  <h1>media(...numeros)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="lista" type="text" placeholder="Ej: 10, 20, 30">
+  <button id="probar">Calcular</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_18.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Casos de ejemplo
+    const casos = [
+      [1, 2, 3],
+      [10],
+      [5, 5, 5, 5],
+      [2.5, 3.5],
+      [-1, 1]
+    ];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(arr => {
+      const li = document.createElement('li');
+      li.textContent = `media(${arr.join(', ')}) = ${media(...arr)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual: lista separada por comas
+    document.getElementById('probar').addEventListener('click', () => {
+      const raw = document.getElementById('lista').value;
+      const parts = raw.split(',').map(s => s.trim()).filter(Boolean);
+      const nums = parts.map(Number);
+
+      if (nums.length === 0 || nums.some(Number.isNaN)) {
+        document.getElementById('out').textContent =
+          'Ingresa una lista de números válida (separados por comas).';
+        return;
+      }
+      document.getElementById('out').textContent =
+        `media(${nums.join(', ')}) = ${media(...nums)}`;
+    });
+  </script>
+</body>
+</html>

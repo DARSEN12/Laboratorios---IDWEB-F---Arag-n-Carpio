@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función convertirAMayusculas (expresada)</title>
+</head>
+<body>
+  <h1>Función convertirAMayusculas(texto)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="txt" type="text" placeholder="Escribe un texto">
+  <button id="probar">Convertir</button>
+  <p id="out"></p>
+
+  <!-- Tu función (expresada) -->
+  <script src="Ejercicio_8.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos
+    const casos = [
+      'hola',
+      'MiXeD Case 123',
+      '',
+      'ñandú con acento',
+      'Espacios   múltiples'
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = `convertirAMayusculas("${t}") = "${convertirAMayusculas(t)}"`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const t = document.getElementById('txt').value;
+      document.getElementById('out').textContent =
+        `convertirAMayusculas("${t}") = "${convertirAMayusculas(t)}"`;
+    });
+  </script>
+</body>
+</html>

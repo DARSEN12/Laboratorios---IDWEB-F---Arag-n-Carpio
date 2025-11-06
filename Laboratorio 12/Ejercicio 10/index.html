@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función saludo (flecha)</title>
+</head>
+<body>
+  <h1>Función saludo(nombre)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="nom" type="text" placeholder="Nombre">
+  <button id="probar">Saludar</button>
+  <p id="out"></p>
+
+  <!-- Tu función (flecha) -->
+  <script src="Ejercicio_10.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos
+    const casos = ['Ana', 'Luis', 'Dev', 'Mundo', ''];
+    const ul = document.getElementById('ejemplos');
+
+    casos.forEach(n => {
+      const li = document.createElement('li');
+      li.textContent = `saludo("${n}") = "${saludo(n)}"`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const n = document.getElementById('nom').value;
+      document.getElementById('out').textContent = saludo(n);
+    });
+  </script>
+</body>
+</html>

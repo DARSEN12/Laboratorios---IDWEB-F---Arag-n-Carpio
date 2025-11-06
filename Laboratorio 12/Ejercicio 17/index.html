@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función saludo (parámetro por defecto)</title>
+</head>
+<body>
+  <h1>saludo(nombre = "Amigo")</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="nom" type="text" placeholder="Nombre (opcional)">
+  <button id="probar">Saludar</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_17.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Ejemplos fijos
+    const casos = ['Ana', '', 'Carlos', '   ', undefined];
+    const ul = document.getElementById('ejemplos');
+
+    casos.forEach(v => {
+      // Si el valor es string vacío o solo espacios, probamos llamada sin argumento
+      const li = document.createElement('li');
+      const usarArg = typeof v !== 'undefined' && v.trim ? v.trim() !== '' : typeof v !== 'undefined';
+      const res = usarArg ? saludo(v) : saludo(); // usa el default "Amigo"
+      li.textContent = usarArg ? `saludo("${v}") = "${res}"` : `saludo() = "${res}"`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const raw = document.getElementById('nom').value;
+      const name = raw.trim();
+      document.getElementById('out').textContent = name ? saludo(name) : saludo();
+    });
+  </script>
+</body>
+</html>

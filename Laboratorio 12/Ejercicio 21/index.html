@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función filtrarArreglo(arr, callback)</title>
+</head>
+<body>
+  <h1>filtrarArreglo(arr, callback)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="lista" type="text" placeholder="Arreglo (ej: 1, 2, 3, 4, 5)">
+  <select id="cond">
+    <option value="pares">Pares</option>
+    <option value="impares">Impares</option>
+    <option value="mayor">Mayores que N</option>
+  </select>
+  <input id="n" type="text" placeholder="N (solo si eliges 'Mayores que N')" style="width:220px">
+  <button id="probar">Filtrar</button>
+  <p id="out"></p>
+
+  <!-- Implementación -->
+  <script src="Ejercicio_21.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Callbacks base
+    const esPar     = (x) => x % 2 === 0;
+    const esImpar   = (x) => x % 2 !== 0;
+    const mayorQue  = (n) => (x) => x > n; // closure
+
+    // Ejemplos fijos
+    const arrEj   = [1, 2, 3, 4, 5, 6];
+    const ej1 = filtrarArreglo(arrEj, esPar);          // [2,4,6]
+    const ej2 = filtrarArreglo(arrEj, esImpar);        // [1,3,5]
+    const ej3 = filtrarArreglo(arrEj, mayorQue(3));    // [4,5,6]
+
+    const ul = document.getElementById('ejemplos');
+    [
+      `filtrarArreglo([${arrEj}], esPar) -> [${ej1}]`,
+      `filtrarArreglo([${arrEj}], esImpar) -> [${ej2}]`,
+      `filtrarArreglo([${arrEj}], mayorQue(3)) -> [${ej3}]`,
+    ].forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const raw = document.getElementById('lista').value.trim();
+      const modo = document.getElementById('cond').value;
+      const rawN = document.getElementById('n').value.trim();
+      const out  = document.getElementById('out');
+
+      const parts = raw.split(',').map(s => s.trim()).filter(Boolean);
+      const nums  = parts.map(Number);
+
+      if (nums.length === 0 || nums.some(Number.isNaN)) {
+        out.textContent = 'Ingresa una lista válida de números separada por comas.';
+        return;
+      }
+
+      let cb;
+      if (modo === 'pares') cb = esPar;
+      else if (modo === 'impares') cb = esImpar;
+      else {
+        const n = Number(rawN);
+        if (Number.isNaN(n)) { out.textContent = 'Ingresa N válido para "Mayores que N".'; return; }
+        cb = mayorQue(n);
+      }
+
+      const res = filtrarArreglo(nums, cb);
+      out.textContent = `Resultado: [${res.join(', ')}]`;
+    });
+  </script>
+</body>
+</html>

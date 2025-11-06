@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función mostrarDatos (...rest)</title>
+</head>
+<body>
+  <h1>mostrarDatos(nombre, edad, ...hobbies)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="nom" type="text" placeholder="Nombre">
+  <input id="edad" type="text" placeholder="Edad (número)">
+  <input id="hobs" type="text" placeholder="Hobbies (coma-separados)">
+  <button id="probar">Mostrar</button>
+  <pre id="out"></pre>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_19.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Casos de ejemplo
+    const casos = [
+      ['Ana', 21, 'leer', 'correr'],
+      ['Luis', 30],
+      ['Dev', 18, 'js', 'linux', 'café'],
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(args => {
+      const li = document.createElement('li');
+      li.textContent = mostrarDatos(...args);
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const nombre = document.getElementById('nom').value.trim();
+      const edadNum = Number(document.getElementById('edad').value);
+      const rawHobs = document.getElementById('hobs').value.trim();
+
+      if (!nombre) {
+        document.getElementById('out').textContent = 'Ingresa un nombre.';
+        return;
+      }
+      if (Number.isNaN(edadNum)) {
+        document.getElementById('out').textContent = 'Edad inválida: ingresa un número.';
+        return;
+      }
+
+      const hobbies = rawHobs
+        ? rawHobs.split(',').map(s => s.trim()).filter(Boolean)
+        : [];
+
+      document.getElementById('out').textContent = mostrarDatos(nombre, edadNum, ...hobbies);
+    });
+  </script>
+</body>
+</html>

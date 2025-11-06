@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función crearSecuencia (closure)</title>
+</head>
+<body>
+  <h1>crearSecuencia(inicio, paso)</h1>
+  <p>Cada invocación de la función interna retorna el siguiente término.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="ini" type="text" placeholder="inicio">
+  <input id="paso" type="text" placeholder="paso">
+  <button id="crear">Crear secuencia</button>
+  <button id="next" disabled>Siguiente</button>
+  <p id="out"></p>
+
+  <!-- Implementación -->
+  <script src="Ejercicio_24.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Ejemplos fijos
+    const secuencia = crearSecuencia(2, 3);
+    const ejemplos = [secuencia(), secuencia(), secuencia(), secuencia()]; // 2,5,8,11
+
+    const ul = document.getElementById('ejemplos');
+    ejemplos.forEach(v => {
+      const li = document.createElement('li');
+      li.textContent = v;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    let f = null;
+
+    document.getElementById('crear').addEventListener('click', () => {
+      const a = Number(document.getElementById('ini').value);
+      const d = Number(document.getElementById('paso').value);
+      const out = document.getElementById('out');
+
+      if (!Number.isFinite(a) || !Number.isFinite(d)) {
+        out.textContent = 'Ingresa números válidos para inicio y paso.';
+        return;
+      }
+      f = crearSecuencia(a, d);
+      document.getElementById('next').disabled = false;
+      out.textContent = 'Secuencia creada. Presiona "Siguiente".';
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+      if (!f) return;
+      const out = document.getElementById('out');
+      out.textContent = f();
+    });
+  </script>
+</body>
+</html>

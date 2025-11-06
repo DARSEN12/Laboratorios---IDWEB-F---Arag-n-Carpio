@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función areaRectangulo</title>
+</head>
+<body>
+  <h1>Función areaRectangulo(base, altura)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="base" type="text" placeholder="Base">
+  <input id="altura" type="text" placeholder="Altura">
+  <button id="probar">Calcular área</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_4.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos [base, altura]
+    const casos = [
+      [4, 3],
+      [10, 2.5],
+      [0, 7],
+      [5.5, 1.2]
+    ];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([b, h]) => {
+      const li = document.createElement('li');
+      li.textContent = `areaRectangulo(${b}, ${h}) = ${areaRectangulo(b, h)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const b = Number(document.getElementById('base').value);
+      const h = Number(document.getElementById('altura').value);
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(b) || Number.isNaN(h)) {
+        out.textContent = 'Ingresa números válidos para base y altura.';
+        return;
+      }
+      if (b < 0 || h < 0) {
+        out.textContent = 'Base y altura deben ser ≥ 0.';
+        return;
+      }
+      out.textContent = `areaRectangulo(${b}, ${h}) = ${areaRectangulo(b, h)}`;
+    });
+  </script>
+</body>
+</html>

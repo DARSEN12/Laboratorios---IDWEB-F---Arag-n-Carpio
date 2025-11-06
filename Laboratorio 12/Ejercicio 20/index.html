@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función ejecutarOperacion(fn, x, y)</title>
+</head>
+<body>
+  <h1>ejecutarOperacion(fn, x, y)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="x" type="text" placeholder="x">
+  <input id="y" type="text" placeholder="y">
+  <select id="op">
+    <option value="sumar">sumar</option>
+    <option value="restar">restar</option>
+    <option value="multiplicar">multiplicar</option>
+    <option value="dividir">dividir</option>
+  </select>
+  <button id="probar">Ejecutar</button>
+  <p id="out"></p>
+
+  <!-- Implementación -->
+  <script src="Ejercicio_20.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Definiciones aritméticas para pasar como 'fn'
+    const sumar        = (a, b) => a + b;
+    const restar       = (a, b) => a - b;
+    const multiplicar  = (a, b) => a * b;
+    const dividir      = (a, b) => { if (b === 0) throw new Error('División por cero'); return a / b; };
+
+    // Ejemplos fijos: [nombre, fn, x, y]
+    const casos = [
+      ['sumar', sumar, 5, 2],
+      ['restar', restar, 5, 2],
+      ['multiplicar', multiplicar, 5, 2],
+      ['dividir', dividir, 10, 2],
+    ];
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([nombre, fn, a, b]) => {
+      const li = document.createElement('li');
+      li.textContent = `ejecutarOperacion(${nombre}, ${a}, ${b}) = ${ejecutarOperacion(fn, a, b)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const a = Number(document.getElementById('x').value);
+      const b = Number(document.getElementById('y').value);
+      const op = document.getElementById('op').value;
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(a) || Number.isNaN(b)) {
+        out.textContent = 'Ingresa números válidos para x e y.';
+        return;
+      }
+
+      const fns = { sumar, restar, multiplicar, dividir };
+      try {
+        const r = ejecutarOperacion(fns[op], a, b);
+        out.textContent = `Resultado: ${r}`;
+      } catch (e) {
+        out.textContent = `Error: ${e.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

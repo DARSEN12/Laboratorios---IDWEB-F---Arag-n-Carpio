@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función acumulador (closure)</title>
+</head>
+<body>
+  <h1>acumulador(valorInicial)</h1>
+  <p>Devuelve una función que acumula sumas sobre un estado interno.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="ini" type="text" placeholder="Valor inicial (por defecto 0)">
+  <button id="crear">Crear acumulador</button>
+  <br><br>
+  <input id="val" type="text" placeholder="Valor a sumar">
+  <button id="sumar" disabled>Sumar</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_16.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Ejemplos fijos
+    const acc1 = acumulador(10);
+    const e1 = [ acc1(5), acc1(-3), acc1(2.5) ]; // 15, 12, 14.5
+
+    const acc2 = acumulador(0);
+    const e2 = [ acc2(1), acc2(1), acc2(1) ];   // 1, 2, 3
+
+    const ul = document.getElementById('ejemplos');
+    const li1 = document.createElement('li');
+    li1.textContent = `acc1 (ini 10) → ${e1.join(', ')}`;
+    const li2 = document.createElement('li');
+    li2.textContent = `acc2 (ini 0) → ${e2.join(', ')}`;
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+
+    // Probador manual
+    let acc = null;
+
+    document.getElementById('crear').addEventListener('click', () => {
+      const v = document.getElementById('ini').value.trim();
+      const inicial = v === '' ? 0 : Number(v);
+      if (v !== '' && Number.isNaN(inicial)) {
+        document.getElementById('out').textContent = 'Ingresa un número válido o deja vacío para 0.';
+        return;
+      }
+      acc = acumulador(inicial);
+      document.getElementById('sumar').disabled = false;
+      document.getElementById('out').textContent = 'Acumulador creado.';
+    });
+
+    document.getElementById('sumar').addEventListener('click', () => {
+      if (!acc) return;
+      const n = Number(document.getElementById('val').value);
+      if (Number.isNaN(n)) {
+        document.getElementById('out').textContent = 'Ingresa un número válido para sumar.';
+        return;
+      }
+      const total = acc(n);
+      document.getElementById('out').textContent = `Total acumulado: ${total}`;
+    });
+  </script>
+</body>
+</html>

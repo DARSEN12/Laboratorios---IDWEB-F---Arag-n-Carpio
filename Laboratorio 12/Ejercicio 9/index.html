@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función calcularDescuento (expresada)</title>
+</head>
+<body>
+  <h1>Función calcularDescuento(precio, porcentaje)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="precio" type="text" placeholder="Precio">
+  <input id="porc" type="text" placeholder="Porcentaje (0-100)">
+  <button id="probar">Calcular</button>
+  <p id="out"></p>
+
+  <!-- Tu función (expresada) -->
+  <script src="Ejercicio_9.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos [precio, porcentaje]
+    const casos = [
+      [100, 0],     // 100
+      [100, 15],    // 85
+      [59.9, 10],   // 53.91
+      [250, 100],   // 0
+      [200, 7.5]    // 185
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([p, q]) => {
+      const li = document.createElement('li');
+      li.textContent = `calcularDescuento(${p}, ${q}) = ${calcularDescuento(p, q)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const p = Number(document.getElementById('precio').value);
+      const q = Number(document.getElementById('porc').value);
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(p) || Number.isNaN(q)) {
+        out.textContent = 'Ingresa números válidos para precio y porcentaje.';
+        return;
+      }
+      if (p < 0) { out.textContent = 'El precio debe ser ≥ 0.'; return; }
+      if (q < 0 || q > 100) { out.textContent = 'El porcentaje debe estar en [0, 100].'; return; }
+
+      const final = calcularDescuento(p, q);
+      out.textContent = `Precio final = ${final} (descuento aplicado: ${q}% de ${p})`;
+    });
+  </script>
+</body>
+</html>

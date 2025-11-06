@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función procesarTexto</title>
+</head>
+<body>
+  <h1>procesarTexto(texto)</h1>
+  <p>Devuelve un objeto con <code>limpio</code> y <code>totalPalabras</code>.</p>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="txt" type="text" placeholder="Ingresa un texto con espacios">
+  <button id="probar">Procesar</button>
+  <pre id="out"></pre>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_13.js"></script>
+
+  <!-- Uso mínimo -->
+  <script>
+    // Casos de ejemplo
+    const casos = [
+      '  hola   mundo  ',
+      'uno   dos   tres',
+      '',
+      '  múltiple   espacio   y  signos! '
+    ];
+    const ul = document.getElementById('ejemplos');
+
+    casos.forEach(t => {
+      const r = procesarTexto(t);
+      const li = document.createElement('li');
+      li.textContent = `procesarTexto("${t}") -> limpio="${r.limpio}", totalPalabras=${r.totalPalabras}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const t = document.getElementById('txt').value;
+      const r = procesarTexto(t);
+      document.getElementById('out').textContent =
+        JSON.stringify(r, null, 2);
+    });
+  </script>
+</body>
+</html>

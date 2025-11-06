@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Función esMultiplo</title>
+</head>
+<body>
+  <h1>Función esMultiplo(a, b)</h1>
+
+  <h2>Ejemplos</h2>
+  <ul id="ejemplos"></ul>
+
+  <h2>Probar</h2>
+  <input id="a" type="text" placeholder="a">
+  <input id="b" type="text" placeholder="b">
+  <button id="probar">Probar</button>
+  <p id="out"></p>
+
+  <!-- Tu función -->
+  <script src="Ejercicio_5.js"></script>
+
+  <!-- Uso mínimo de la función -->
+  <script>
+    // Ejemplos fijos [a, b]
+    const casos = [
+      [6, 3],     // true
+      [10, 5],    // true
+      [7, 3],     // false
+      [-8, 4],    // true
+      [0, 5],     // true (0 es múltiplo de cualquier b ≠ 0)
+    ];
+
+    const ul = document.getElementById('ejemplos');
+    casos.forEach(([x, y]) => {
+      const li = document.createElement('li');
+      li.textContent = `esMultiplo(${x}, ${y}) = ${esMultiplo(x, y)}`;
+      ul.appendChild(li);
+    });
+
+    // Probador manual
+    document.getElementById('probar').addEventListener('click', () => {
+      const x = Number(document.getElementById('a').value);
+      const y = Number(document.getElementById('b').value);
+      const out = document.getElementById('out');
+
+      if (Number.isNaN(x) || Number.isNaN(y)) {
+        out.textContent = 'Ingresa números válidos para a y b.';
+        return;
+      }
+      if (y === 0) {
+        out.textContent = 'b no puede ser 0 (indefinido).';
+        return;
+      }
+      out.textContent = `esMultiplo(${x}, ${y}) = ${esMultiplo(x, y)}`;
+    });
+  </script>
+</body>
+</html>
