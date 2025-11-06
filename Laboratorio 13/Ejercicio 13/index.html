@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>combinarCatalogos</title>
+</head>
+<body>
+  <h1>combinarCatalogos(tiendaA, tiendaB)</h1>
+  <p>Combina catálogos (objeto → precio). Si un producto existe en ambas tiendas, se toma el <b>precio menor</b> y se redondea a <b>2 decimales</b>.</p>
+
+  <h2>Ejemplos</h2>
+  <pre id="ejemplos"></pre>
+
+  <h2>Probar</h2>
+  <div>
+    <label>Tienda A</label><br/>
+    <textarea id="a" rows="3" style="width:520px">laptop: 3500.5, mouse: 100.35, teclado: 250.9</textarea>
+  </div>
+  <div>
+    <label>Tienda B</label><br/>
+    <textarea id="b" rows="3" style="width:520px">mouse: 95.2, monitor: 720.457, teclado: 260.1</textarea>
+  </div>
+  <button id="probar">Combinar</button>
+  <pre id="out"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
