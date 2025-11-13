@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redondeo de precios</title>
+</head>
+<body>
+  <h2>Redondeo de precios</h2>
+
+  <label for="precio">Ingresa el precio del producto:</label>
+  <input type="number" id="precio" step="0.01" placeholder="Ej: 12.49">
+  <button onclick="calcularRedondeos()">Calcular</button>
+
+  <h3>Resultados</h3>
+  <p><strong>Redondeo hacia abajo:</strong> <span id="haciaAbajo">-</span></p>
+  <p><strong>Redondeo hacia arriba:</strong> <span id="haciaArriba">-</span></p>
+  <p><strong>Redondeo normal:</strong> <span id="normal">-</span></p>
+
+  <script>
+    function calcularRedondeos() {
+      const input = document.getElementById('precio').value;
+      const precio = parseFloat(input);
+
+      if (isNaN(precio)) {
+        alert('Por favor, ingresa un número válido.');
+        return;
+      }
+
+      // Redondeos
+      const haciaAbajo = Math.floor(precio); // redondeo hacia abajo
+      const haciaArriba = Math.ceil(precio); // redondeo hacia arriba
+      const normal = Math.round(precio);     // redondeo normal
+
+      // Render de resultados
+      document.getElementById('haciaAbajo').textContent = haciaAbajo;
+      document.getElementById('haciaArriba').textContent = haciaArriba;
+      document.getElementById('normal').textContent = normal;
+    }
+  </script>
+</body>
+</html>

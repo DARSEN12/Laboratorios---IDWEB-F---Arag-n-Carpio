@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Potencias y Raíces</title>
+</head>
+<body>
+  <h2>Potencias y raíces</h2>
+
+  <label for="num">Ingresa un número:</label>
+  <input type="number" id="num" step="any" placeholder="Ej: 5">
+
+  <button onclick="calcular()">Calcular</button>
+
+  <h3>Resultados</h3>
+  <p><strong>Cuadrado:</strong> <span id="cuadrado">-</span></p>
+  <p><strong>Cubo:</strong> <span id="cubo">-</span></p>
+  <p><strong>Raíz cuadrada:</strong> <span id="raiz">-</span></p>
+
+  <script>
+    function calcular() {
+      const valor = parseFloat(document.getElementById('num').value);
+
+      if (isNaN(valor)) {
+        alert("Ingresa un número válido.");
+        return;
+      }
+
+      const cuadrado = Math.pow(valor, 2);
+      const cubo = Math.pow(valor, 3);
+      const raiz = Math.sqrt(valor);
+
+      document.getElementById('cuadrado').textContent = cuadrado;
+      document.getElementById('cubo').textContent = cubo;
+      document.getElementById('raiz').textContent = raiz;
+    }
+  </script>
+</body>
+</html>

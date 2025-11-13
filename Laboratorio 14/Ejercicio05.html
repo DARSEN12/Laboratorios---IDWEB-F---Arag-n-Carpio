@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lanzamiento de dados</title>
+</head>
+<body>
+  <h2>Simulación de lanzamiento de dos dados</h2>
+
+  <button onclick="lanzarDados()">Lanzar dados</button>
+
+  <p><strong>Dado 1:</strong> <span id="dado1">-</span></p>
+  <p><strong>Dado 2:</strong> <span id="dado2">-</span></p>
+  <p><strong>Suma:</strong> <span id="suma">-</span></p>
+
+  <script>
+    // Reutilizamos la función del ejercicio anterior
+    function numeroAleatorio(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function lanzarDados() {
+      const d1 = numeroAleatorio(1, 6);
+      const d2 = numeroAleatorio(1, 6);
+      const suma = d1 + d2;
+
+      document.getElementById('dado1').textContent = d1;
+      document.getElementById('dado2').textContent = d2;
+      document.getElementById('suma').textContent = suma;
+    }
+  </script>
+</body>
+</html>

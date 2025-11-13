@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Normalización de calificaciones</title>
+</head>
+<body>
+  <h2>Normalización de calificaciones (0–1)</h2>
+
+  <p>Ingresa las calificaciones separadas por comas (ej: 10, 15, 20, 18):</p>
+  <input type="text" id="inputNotas" value="10, 15, 20, 18" size="40">
+  <button onclick="normalizar()">Normalizar</button>
+
+  <h3>Resultado</h3>
+  <p><strong>Original:</strong> <span id="original">-</span></p>
+  <p><strong>Normalizadas:</strong> <span id="normalizadas">-</span></p>
+
+  <script>
+    function normalizarCalificaciones(calificaciones) {
+      const max = Math.max(...calificaciones);
+      if (max === 0) return calificaciones.map(() => 0);
+      return calificaciones.map(nota => nota / max);
+    }
+
+    function normalizar() {
+      const texto = document.getElementById('inputNotas').value;
+
+      // Parseo básico: separar por coma y convertir a número
+      const notas = texto
+        .split(',')
+        .map(n => parseFloat(n.trim()))
+        .filter(n => !isNaN(n));
+
+      if (notas.length === 0) {
+        alert("Ingresa al menos una calificación válida.");
+        return;
+      }
+
+      const normalizadas = normalizarCalificaciones(notas);
+
+      document.getElementById('original').textContent = notas.join(', ');
+      document.getElementById('normalizadas').textContent = normalizadas
+        .map(n => n.toFixed(3))
+        .join(', ');
+    }
+  </script>
+</body>
+</html>

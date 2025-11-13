@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Inventario con Encapsulación</title>
+</head>
+<body>
+  <h2>Control de Inventario</h2>
+
+  <!-- Formulario para crear / actualizar producto -->
+  <h3>Crear / Actualizar Producto</h3>
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Ej: Mouse Gamer">
+
+  <label for="precio">Precio:</label>
+  <input type="text" id="precio" placeholder='Ej: 120.5 o "120.5"'>
+
+  <label for="stock">Stock inicial:</label>
+  <input type="number" id="stock" step="1" placeholder="Ej: 10">
+
+  <button onclick="crearProducto()">Crear / Actualizar</button>
+
+  <h3>Producto Actual</h3>
+  <p><strong>Nombre:</strong> <span id="infoNombre">-</span></p>
+  <p><strong>Precio:</strong> <span id="infoPrecio">-</span></p>
+  <p><strong>Stock:</strong> <span id="infoStock">-</span></p>
+
+  <hr>
+
+  <!-- Venta -->
+  <h3>Registrar Venta</h3>
+  <label for="cantidadVenta">Cantidad a vender:</label>
+  <input type="number" id="cantidadVenta" step="1" placeholder="Ej: 3">
+  <button onclick="vender()">Vender</button>
+
+  <h3>Mensajes</h3>
+  <p id="mensaje"></p>
+
+  <script>
+    class Producto {
+      #nombre;
+      #precio; // se almacena como número
+      #stock;
+
+      constructor(nombre, precio, stock) {
+        this.#nombre = nombre;
+        this.setPrecio(precio); // acepta número o string
+        this.setStock(stock);
+      }
+
+      // Getters
+      getNombre() {
+        return this.#nombre;
+      }
+
+      // Devuelve el precio formateado como moneda, ej: "$120.00"
+      getPrecio() {
+        return `$${this.#precio.toFixed(2)}`;
+      }
+
+      // Si necesitas el valor numérico crudo
+      getPrecioNumero() {
+        return this.#precio;
+      }
+
+      getStock() {
+        return this.#stock;
+      }
+
+      // Setters
+      setPrecio(precio) {
+        // Acepta number o string ("120.5")
+        const valorNumerico = Number(precio);
+
+        if (isNaN(valorNumerico) || valorNumerico <= 0) {
+          throw new Error('El precio debe ser un número mayor a 0');
+        }
+
+        this.#precio = valorNumerico;
+      }
+
+      setStock(stock) {
+        if (!Number.isInteger(stock) || stock < 0) {
+          throw new Error('El stock debe ser un entero mayor o igual a 0');
+        }
+        this.#stock = stock;
+      }
+
+      vender(cantidad) {
+        if (!Number.isInteger(cantidad) || cantidad <= 0) {
+          return { exito: false, mensaje: 'La cantidad a vender debe ser un entero mayor a 0' };
+        }
+
+        if (cantidad > this.#stock) {
+          return { exito: false, mensaje: `No hay stock suficiente. Stock actual: ${this.#stock}` };
+        }
+
+        this.#stock -= cantidad;
+        return {
+          exito: true,
+          mensaje: `Venta realizada. Se vendieron ${cantidad} unidades. Stock restante: ${this.#stock}`
+        };
+      }
+    }
+
+    // Variable global para mantener el producto actual
+    let productoActual = null;
+
+    function mostrarProducto() {
+      if (!productoActual) {
+        document.getElementById('infoNombre').textContent = '-';
+        document.getElementById('infoPrecio').textContent = '-';
+        document.getElementById('infoStock').textContent = '-';
+        return;
+      }
+
+      document.getElementById('infoNombre').textContent = productoActual.getNombre();
+      document.getElementById('infoPrecio').textContent = productoActual.getPrecio(); // "$120.00"
+      document.getElementById('infoStock').textContent = productoActual.getStock();
+    }
+
+    function setMensaje(texto) {
+      document.getElementById('mensaje').textContent = texto;
+    }
+
+    function crearProducto() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const precio = document.getElementById('precio').value; // string, lo convierte Number() en el setter
+      const stock = parseInt(document.getElementById('stock').value);
+
+      if (!nombre) {
+        setMensaje('El nombre no puede estar vacío.');
+        return;
+      }
+
+      if (precio === '' || isNaN(Number(precio)) || isNaN(stock)) {
+        setMensaje('Precio y stock deben ser valores numéricos.');
+        return;
+      }
+
+      try {
+        productoActual = new Producto(nombre, precio, stock);
+        mostrarProducto();
+        setMensaje('Producto creado / actualizado correctamente.');
+      } catch (e) {
+        setMensaje(e.message);
+      }
+    }
+
+    function vender() {
+      if (!productoActual) {
+        setMensaje('Primero crea un producto antes de vender.');
+        return;
+      }
+
+      const cantidad = parseInt(document.getElementById('cantidadVenta').value);
+
+      if (isNaN(cantidad)) {
+        setMensaje('Ingresa una cantidad válida a vender.');
+        return;
+      }
+
+      const resultado = productoActual.vender(cantidad);
+      setMensaje(resultado.mensaje);
+      mostrarProducto();
+    }
+  </script>
+</body>
+</html>

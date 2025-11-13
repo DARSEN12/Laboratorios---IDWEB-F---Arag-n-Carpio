@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de contraseña numérica</title>
+</head>
+<body>
+  <h2>Generar contraseña numérica de 6 dígitos</h2>
+
+  <button onclick="mostrarPassword()">Generar</button>
+
+  <p><strong>Contraseña generada:</strong> <span id="pwd">-</span></p>
+
+  <script>
+    function generarPasswordNumerica() {
+      let password = "";
+
+      for (let i = 0; i < 6; i++) {
+        const digito = Math.floor(Math.random() * 10); // 0–9
+        password += digito;
+      }
+
+      return password;
+    }
+
+    function mostrarPassword() {
+      const pwd = generarPasswordNumerica();
+      document.getElementById('pwd').textContent = pwd;
+    }
+  </script>
+</body>
+</html>

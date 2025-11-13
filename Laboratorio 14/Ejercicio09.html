@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Distancia entre dos puntos</title>
+</head>
+<body>
+  <h2>Distancia entre dos puntos en el plano cartesiano</h2>
+
+  <h3>Coordenadas del punto A (x1, y1)</h3>
+  <label for="x1">x1:</label>
+  <input type="number" id="x1" step="any" value="0">
+  <label for="y1">y1:</label>
+  <input type="number" id="y1" step="any" value="0">
+
+  <h3>Coordenadas del punto B (x2, y2)</h3>
+  <label for="x2">x2:</label>
+  <input type="number" id="x2" step="any" value="3">
+  <label for="y2">y2:</label>
+  <input type="number" id="y2" step="any" value="4">
+
+  <br><br>
+  <button onclick="calcularDistancias()">Calcular</button>
+
+  <h3>Resultados</h3>
+  <p><strong>Distancia entre A y B:</strong> <span id="dist_ab">-</span></p>
+  <p><strong>Distancia de A al origen:</strong> <span id="dist_a0">-</span></p>
+  <p><strong>Distancia de B al origen:</strong> <span id="dist_b0">-</span></p>
+  <p><strong>Suma de distancias al origen (A + B):</strong> <span id="dist_suma">-</span></p>
+
+  <script>
+    function calcularDistancias() {
+      const x1 = parseFloat(document.getElementById('x1').value);
+      const y1 = parseFloat(document.getElementById('y1').value);
+      const x2 = parseFloat(document.getElementById('x2').value);
+      const y2 = parseFloat(document.getElementById('y2').value);
+
+      if ([x1, y1, x2, y2].some(v => isNaN(v))) {
+        alert('Completa todas las coordenadas con valores numéricos.');
+        return;
+      }
+
+      // Distancia entre A(x1, y1) y B(x2, y2)
+      const distAB = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+
+      // Distancia de A al origen (0,0)
+      const distA0 = Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2));
+
+      // Distancia de B al origen (0,0)
+      const distB0 = Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2));
+
+      // Suma de distancias al origen
+      const suma = distA0 + distB0;
+
+      // Mostrar con 4 decimales
+      document.getElementById('dist_ab').textContent = distAB.toFixed(4);
+      document.getElementById('dist_a0').textContent = distA0.toFixed(4);
+      document.getElementById('dist_b0').textContent = distB0.toFixed(4);
+      document.getElementById('dist_suma').textContent = suma.toFixed(4);
+    }
+  </script>
+</body>
+</html>

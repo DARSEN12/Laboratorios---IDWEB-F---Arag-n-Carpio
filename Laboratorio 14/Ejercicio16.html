@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Herencia: Empleado - Programador - ProgramadorSenior</title>
+</head>
+<body>
+  <h2>Jerarquía de Empleados (POO / Herencia)</h2>
+
+  <label for="tipoEmpleado">Tipo de empleado:</label>
+  <select id="tipoEmpleado" onchange="actualizarFormulario()">
+    <option value="empleado">Empleado</option>
+    <option value="programador">Programador</option>
+    <option value="programadorSenior">Programador Senior</option>
+  </select>
+
+  <h3>Datos básicos</h3>
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+
+  <label for="sueldoBase">Sueldo base:</label>
+  <input type="number" id="sueldoBase" step="0.01" placeholder="Ej: 2000">
+
+  <div id="formProgramador" style="display:none;">
+    <h3>Datos de Programador</h3>
+    <label for="lenguaje">Lenguaje:</label>
+    <input type="text" id="lenguaje" placeholder="Ej: JavaScript">
+  </div>
+
+  <br>
+  <button onclick="crearEmpleado()">Crear empleado</button>
+
+  <p id="mensaje" style="color:red;"></p>
+
+  <h3>Empleado creado</h3>
+  <p><strong>Tipo:</strong> <span id="infoTipo">-</span></p>
+  <p><strong>Nombre:</strong> <span id="infoNombre">-</span></p>
+  <p><strong>Sueldo base:</strong> <span id="infoSueldoBase">-</span></p>
+  <p><strong>Lenguaje:</strong> <span id="infoLenguaje">-</span></p>
+  <p><strong>Sueldo calculado:</strong> <span id="infoSueldoCalc">-</span></p>
+
+  <script>
+    // ================= CLASES =================
+    class Empleado {
+      constructor(nombre, sueldoBase) {
+        this.nombre = nombre;
+        this.sueldoBase = sueldoBase;
+      }
+
+      calcularSueldo() {
+        // Para un empleado normal, es solo el sueldo base
+        return this.sueldoBase;
+      }
+    }
+
+    class Programador extends Empleado {
+      constructor(nombre, sueldoBase, lenguaje) {
+        super(nombre, sueldoBase);
+        this.lenguaje = lenguaje;
+      }
+
+      calcularSueldo() {
+        // 10% de bono sobre el sueldo base
+        return this.sueldoBase * 1.10;
+      }
+    }
+
+    class ProgramadorSenior extends Programador {
+      constructor(nombre, sueldoBase, lenguaje) {
+        super(nombre, sueldoBase, lenguaje);
+      }
+
+      calcularSueldo() {
+        // Programador ya da 10% de bono
+        // Senior debe llegar a 25% total
+        // -> super.calcularSueldo() = base * 1.10
+        // Añadimos 15% extra: base * 0.15
+        const sueldoProgramador = super.calcularSueldo();
+        const extraSenior = this.sueldoBase * 0.15; // 15% adicional
+        return sueldoProgramador + extraSenior;     // base * 1.25
+      }
+    }
+
+    // Instancia actual
+    let empleadoActual = null;
+
+    // ================ UI LOGIC =================
+    function actualizarFormulario() {
+      const tipo = document.getElementById('tipoEmpleado').value;
+      const formProg = document.getElementById('formProgramador');
+
+      if (tipo === 'programador' || tipo === 'programadorSenior') {
+        formProg.style.display = 'block';
+      } else {
+        formProg.style.display = 'none';
+      }
+
+      document.getElementById('mensaje').textContent = '';
+    }
+
+    function crearEmpleado() {
+      const tipo = document.getElementById('tipoEmpleado').value;
+      const nombre = document.getElementById('nombre').value.trim();
+      const sueldoBase = parseFloat(document.getElementById('sueldoBase').value);
+      const lenguaje = document.getElementById('lenguaje').value.trim();
+      const msg = document.getElementById('mensaje');
+      msg.textContent = '';
+
+      if (!nombre) {
+        msg.textContent = 'El nombre es obligatorio.';
+        return;
+      }
+
+      if (isNaN(sueldoBase) || sueldoBase <= 0) {
+        msg.textContent = 'El sueldo base debe ser un número mayor a 0.';
+        return;
+      }
+
+      if ((tipo === 'programador' || tipo === 'programadorSenior') && !lenguaje) {
+        msg.textContent = 'El lenguaje es obligatorio para programadores.';
+        return;
+      }
+
+      // Crear instancia según el tipo
+      if (tipo === 'empleado') {
+        empleadoActual = new Empleado(nombre, sueldoBase);
+      } else if (tipo === 'programador') {
+        empleadoActual = new Programador(nombre, sueldoBase, lenguaje);
+      } else if (tipo === 'programadorSenior') {
+        empleadoActual = new ProgramadorSenior(nombre, sueldoBase, lenguaje);
+      }
+
+      mostrarEmpleado(tipo, lenguaje);
+      msg.textContent = 'Empleado creado correctamente.';
+    }
+
+    function mostrarEmpleado(tipo, lenguaje) {
+      if (!empleadoActual) return;
+
+      document.getElementById('infoTipo').textContent = tipo;
+      document.getElementById('infoNombre').textContent = empleadoActual.nombre;
+      document.getElementById('infoSueldoBase').textContent = empleadoActual.sueldoBase.toFixed(2);
+
+      if (tipo === 'empleado') {
+        document.getElementById('infoLenguaje').textContent = '-';
+      } else {
+        document.getElementById('infoLenguaje').textContent = lenguaje;
+      }
+
+      const sueldoCalc = empleadoActual.calcularSueldo();
+      document.getElementById('infoSueldoCalc').textContent = sueldoCalc.toFixed(2);
+    }
+  </script>
+</body>
+</html>

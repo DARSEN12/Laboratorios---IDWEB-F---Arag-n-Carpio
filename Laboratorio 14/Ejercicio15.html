@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Polimorfismo con Usuarios</title>
+</head>
+<body>
+  <h2>Polimorfismo: Lista de Usuarios (Cliente / Administrador)</h2>
+
+  <button onclick="crearUsuariosDemo()">Crear lista de usuarios de prueba</button>
+  <button onclick="mostrarUsuarios()">Mostrar info (polimorfismo)</button>
+
+  <h3>Salida</h3>
+  <ul id="listaSalida"></ul>
+
+  <script>
+    class Usuario {
+      constructor(nombre, email) {
+        this.nombre = nombre;
+        this.email = email;
+      }
+
+      mostrarInfo() {
+        return `Nombre: ${this.nombre}, Email: ${this.email}`;
+      }
+    }
+
+    class Cliente extends Usuario {
+      constructor(nombre, email, nivelFidelidad) {
+        super(nombre, email);
+        this.nivelFidelidad = nivelFidelidad;
+      }
+
+      mostrarInfo() {
+        return `${super.mostrarInfo()}, Nivel de fidelidad: ${this.nivelFidelidad}`;
+      }
+    }
+
+    class Administrador extends Usuario {
+      constructor(nombre, email, permisos) {
+        super(nombre, email);
+        this.permisos = permisos; // { crear, editar, eliminar }
+      }
+
+      mostrarInfo() {
+        const { crear, editar, eliminar } = this.permisos;
+        return (
+          `${super.mostrarInfo()}, ` +
+          `Permisos -> crear: ${crear}, editar: ${editar}, eliminar: ${eliminar}`
+        );
+      }
+    }
+
+    // Array polimórfico global
+    let usuarios = [];
+
+    function crearUsuariosDemo() {
+      usuarios = [
+        new Cliente("Juan Pérez", "juan@example.com", 3),
+        new Administrador("Ana Admin", "ana@example.com", {
+          crear: true,
+          editar: true,
+          eliminar: false
+        }),
+        new Cliente("María López", "maria@example.com", 5),
+        new Administrador("Carlos Root", "carlos@example.com", {
+          crear: true,
+          editar: true,
+          eliminar: true
+        })
+      ];
+
+      const ul = document.getElementById('listaSalida');
+      ul.innerHTML = "";
+      const li = document.createElement('li');
+      li.textContent = "Lista de usuarios de prueba creada (Cliente + Administrador).";
+      ul.appendChild(li);
+    }
+
+    function mostrarUsuarios() {
+      const ul = document.getElementById('listaSalida');
+      ul.innerHTML = "";
+
+      if (usuarios.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = "Primero crea la lista de usuarios de prueba.";
+        ul.appendChild(li);
+        return;
+      }
+
+      // Polimorfismo: cada objeto responde con su propia implementación de mostrarInfo()
+      usuarios.forEach((u, idx) => {
+        const li = document.createElement('li');
+        li.textContent = `#${idx + 1} - ${u.mostrarInfo()}`;
+        ul.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

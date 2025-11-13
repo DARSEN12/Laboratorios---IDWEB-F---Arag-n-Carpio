@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuentas Bancarias: Encapsulación y Polimorfismo</title>
+</head>
+<body>
+  <h2>Encapsulación y Polimorfismo: Cuenta, CuentaAhorro, CuentaCorriente</h2>
+
+  <h3>Estado de cuentas</h3>
+  <p><strong>Cuenta Ahorro - Saldo:</strong> <span id="saldoAhorro">-</span></p>
+  <p><strong>Cuenta Corriente - Saldo:</strong> <span id="saldoCorriente">-</span></p>
+  <p><em>La cuenta corriente tiene sobregiro permitido hasta -300.</em></p>
+
+  <hr>
+
+  <h3>Operaciones sobre Cuenta Ahorro</h3>
+  <label for="montoDepAhorro">Monto a depositar:</label>
+  <input type="number" id="montoDepAhorro" step="0.01">
+  <button onclick="depositarAhorro()">Depositar</button>
+
+  <br><br>
+
+  <label for="montoRetAhorro">Monto a retirar:</label>
+  <input type="number" id="montoRetAhorro" step="0.01">
+  <button onclick="retirarAhorro()">Retirar</button>
+
+  <hr>
+
+  <h3>Operaciones sobre Cuenta Corriente</h3>
+  <label for="montoDepCorriente">Monto a depositar:</label>
+  <input type="number" id="montoDepCorriente" step="0.01">
+  <button onclick="depositarCorriente()">Depositar</button>
+
+  <br><br>
+
+  <label for="montoRetCorriente">Monto a retirar:</label>
+  <input type="number" id="montoRetCorriente" step="0.01">
+  <button onclick="retirarCorriente()">Retirar</button>
+
+  <hr>
+
+  <h3>Transferencias entre cuentas</h3>
+  <p>Selecciona cuenta de origen (el destino se asume la otra cuenta).</p>
+
+  <label>
+    <input type="radio" name="origen" value="ahorro" checked>
+    Origen: Cuenta Ahorro → Destino: Cuenta Corriente
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="origen" value="corriente">
+    Origen: Cuenta Corriente → Destino: Cuenta Ahorro
+  </label>
+
+  <br><br>
+
+  <label for="montoTransfer">Monto a transferir:</label>
+  <input type="number" id="montoTransfer" step="0.01">
+  <button onclick="transferir()">Transferir</button>
+
+  <hr>
+
+  <h3>Mensajes</h3>
+  <p id="mensaje" style="color:blue;"></p>
+
+  <script>
+    // ================= CLASE BASE =================
+    class Cuenta {
+      #saldo;
+
+      constructor(saldoInicial = 0) {
+        this.#saldo = 0;
+        if (saldoInicial > 0) {
+          this.depositar(saldoInicial);
+        }
+      }
+
+      getSaldo() {
+        return this.#saldo;
+      }
+
+      _retirarInterno(monto) {
+        this.#saldo -= monto;
+      }
+
+      _depositarInterno(monto) {
+        this.#saldo += monto;
+      }
+
+      depositar(monto) {
+        if (typeof monto !== 'number' || monto <= 0) {
+          return { exito: false, mensaje: 'El monto a depositar debe ser > 0' };
+        }
+        this._depositarInterno(monto);
+        return { exito: true, mensaje: `Depósito OK. Saldo: ${this.getSaldo()}` };
+      }
+
+      // Versión genérica: sin sobregiro
+      retirar(monto) {
+        if (typeof monto !== 'number' || monto <= 0) {
+          return { exito: false, mensaje: 'El monto a retirar debe ser > 0' };
+        }
+        if (monto > this.getSaldo()) {
+          return { exito: false, mensaje: 'Fondos insuficientes' };
+        }
+        this._retirarInterno(monto);
+        return { exito: true, mensaje: `Retiro OK. Saldo: ${this.getSaldo()}` };
+      }
+
+      transferir(cuentaDestino, monto) {
+        if (!(cuentaDestino instanceof Cuenta)) {
+          return { exito: false, mensaje: 'Cuenta destino inválida' };
+        }
+
+        const resRetiro = this.retirar(monto); // polimórfico
+
+        if (!resRetiro.exito) {
+          return { exito: false, mensaje: `No se pudo transferir: ${resRetiro.mensaje}` };
+        }
+
+        const resDeposito = cuentaDestino.depositar(monto);
+        if (!resDeposito.exito) {
+          // rollback simple
+          this._depositarInterno(monto);
+          return { exito: false, mensaje: `Error en destino: ${resDeposito.mensaje}` };
+        }
+
+        return {
+          exito: true,
+          mensaje: `Transferencia OK. Origen: ${this.getSaldo()}, Destino: ${cuentaDestino.getSaldo()}`
+        };
+      }
+    }
+
+    // ================= CUENTA AHORRO =================
+    class CuentaAhorro extends Cuenta {
+      constructor(saldoInicial = 0) {
+        super(saldoInicial);
+      }
+
+      // No permite sobregiro
+      retirar(monto) {
+        if (typeof monto !== 'number' || monto <= 0) {
+          return { exito: false, mensaje: 'El monto a retirar debe ser > 0' };
+        }
+        if (monto > this.getSaldo()) {
+          return { exito: false, mensaje: 'Fondos insuficientes (Cuenta Ahorro)' };
+        }
+        this._retirarInterno(monto);
+        return { exito: true, mensaje: `Retiro OK (Ahorro). Saldo: ${this.getSaldo()}` };
+      }
+    }
+
+    // ================= CUENTA CORRIENTE =================
+    class CuentaCorriente extends Cuenta {
+      constructor(saldoInicial = 0, limiteSobregiro = 0) {
+        super(saldoInicial);
+        this.limiteSobregiro = limiteSobregiro;
+      }
+
+      // Permite sobregiro hasta -limiteSobregiro
+      retirar(monto) {
+        if (typeof monto !== 'number' || monto <= 0) {
+          return { exito: false, mensaje: 'El monto a retirar debe ser > 0' };
+        }
+        const saldoActual = this.getSaldo();
+        const saldoPost = saldoActual - monto;
+
+        if (saldoPost < -this.limiteSobregiro) {
+          return {
+            exito: false,
+            mensaje: `Sobregiro excede el límite. Saldo: ${saldoActual}, límite: ${this.limiteSobregiro}`
+          };
+        }
+
+        this._retirarInterno(monto);
+        return { exito: true, mensaje: `Retiro OK (Corriente). Saldo: ${this.getSaldo()}` };
+      }
+    }
+
+    // ================= INSTANCIAS DEMO =================
+    const cuentaAhorro = new CuentaAhorro(1000);
+    const cuentaCorriente = new CuentaCorriente(500, 300); // sobregiro hasta -300
+
+    function actualizarSaldos() {
+      document.getElementById('saldoAhorro').textContent = cuentaAhorro.getSaldo().toFixed(2);
+      document.getElementById('saldoCorriente').textContent = cuentaCorriente.getSaldo().toFixed(2);
+    }
+
+    function setMensaje(texto) {
+      document.getElementById('mensaje').textContent = texto;
+    }
+
+    // ====== Operaciones sobre Cuenta Ahorro ======
+    function depositarAhorro() {
+      const monto = parseFloat(document.getElementById('montoDepAhorro').value);
+      const res = cuentaAhorro.depositar(monto);
+      setMensaje(res.mensaje);
+      actualizarSaldos();
+    }
+
+    function retirarAhorro() {
+      const monto = parseFloat(document.getElementById('montoRetAhorro').value);
+      const res = cuentaAhorro.retirar(monto);
+      setMensaje(res.mensaje);
+      actualizarSaldos();
+    }
+
+    // ====== Operaciones sobre Cuenta Corriente ======
+    function depositarCorriente() {
+      const monto = parseFloat(document.getElementById('montoDepCorriente').value);
+      const res = cuentaCorriente.depositar(monto);
+      setMensaje(res.mensaje);
+      actualizarSaldos();
+    }
+
+    function retirarCorriente() {
+      const monto = parseFloat(document.getElementById('montoRetCorriente').value);
+      const res = cuentaCorriente.retirar(monto);
+      setMensaje(res.mensaje);
+      actualizarSaldos();
+    }
+
+    // ====== Transferencias ======
+    function transferir() {
+      const monto = parseFloat(document.getElementById('montoTransfer').value);
+      const origenValor = document.querySelector('input[name="origen"]:checked').value;
+
+      let origen, destino;
+      if (origenValor === 'ahorro') {
+        origen = cuentaAhorro;
+        destino = cuentaCorriente;
+      } else {
+        origen = cuentaCorriente;
+        destino = cuentaAhorro;
+      }
+
+      const res = origen.transferir(destino, monto);
+      setMensaje(res.mensaje);
+      actualizarSaldos();
+    }
+
+    // Init
+    actualizarSaldos();
+  </script>
+</body>
+</html>

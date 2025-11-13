@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Grados ↔ Radianes</title>
+</head>
+<body>
+  <h2>Conversión de ángulos</h2>
+
+  <!-- De grados a radianes -->
+  <h3>Grados a radianes (con seno y coseno)</h3>
+  <label for="grados">Ángulo en grados:</label>
+  <input type="number" id="grados" step="any" placeholder="Ej: 45">
+  <button onclick="convertirGradosARadianes()">Calcular</button>
+
+  <p><strong>Radianes:</strong> <span id="rad_result">-</span></p>
+  <p><strong>sen(θ):</strong> <span id="sen_result">-</span></p>
+  <p><strong>cos(θ):</strong> <span id="cos_result">-</span></p>
+
+  <hr>
+
+  <!-- De radianes a grados -->
+  <h3>Radianes a grados</h3>
+  <label for="radianes">Ángulo en radianes:</label>
+  <input type="number" id="radianes" step="any" placeholder="Ej: 3.1416">
+  <button onclick="convertirRadianesAGrados()">Calcular</button>
+
+  <p><strong>Grados:</strong> <span id="deg_result">-</span></p>
+
+  <script>
+    // Convierte grados a radianes
+    function gradosARadianes(grados) {
+      return grados * (Math.PI / 180);
+    }
+
+    // Convierte radianes a grados
+    function radianesAGrados(radianes) {
+      return radianes * (180 / Math.PI);
+    }
+
+    function convertirGradosARadianes() {
+      const grados = parseFloat(document.getElementById('grados').value);
+
+      if (isNaN(grados)) {
+        alert('Ingresa un valor en grados válido');
+        return;
+      }
+
+      const rad = gradosARadianes(grados);
+      const sen = Math.sin(rad);
+      const cos = Math.cos(rad);
+
+      // Opcional: limitar decimales para que se vea mejor
+      document.getElementById('rad_result').textContent = rad.toFixed(6);
+      document.getElementById('sen_result').textContent = sen.toFixed(6);
+      document.getElementById('cos_result').textContent = cos.toFixed(6);
+    }
+
+    function convertirRadianesAGrados() {
+      const radianes = parseFloat(document.getElementById('radianes').value);
+
+      if (isNaN(radianes)) {
+        alert('Ingresa un valor en radianes válido');
+        return;
+      }
+
+      const grados = radianesAGrados(radianes);
+
+      document.getElementById('deg_result').textContent = grados.toFixed(6);
+    }
+  </script>
+</body>
+</html>

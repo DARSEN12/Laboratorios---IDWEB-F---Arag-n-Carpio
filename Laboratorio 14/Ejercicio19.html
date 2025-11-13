@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Polimorfismo: Notificaciones</title>
+</head>
+<body>
+  <h2>Polimorfismo con Notificaciones</h2>
+
+  <button onclick="demoNotificaciones()">Procesar lista de notificaciones</button>
+
+  <h3>Log</h3>
+  <pre id="log"></pre>
+
+  <script>
+    class Notificacion {
+      constructor(destinatario) {
+        this.destinatario = destinatario;
+      }
+
+      enviar() {
+        throw new Error("El método enviar() debe ser sobrescrito por la subclase");
+      }
+    }
+
+    class Email extends Notificacion {
+      constructor(destinatario, asunto, cuerpo) {
+        super(destinatario);
+        this.asunto = asunto;
+        this.cuerpo = cuerpo;
+      }
+
+      enviar() {
+        return `📧 EMAIL a ${this.destinatario} | Asunto: "${this.asunto}" | Cuerpo: "${this.cuerpo}"`;
+      }
+    }
+
+    class SMS extends Notificacion {
+      constructor(destinatario, mensaje) {
+        super(destinatario);
+        this.mensaje = mensaje;
+      }
+
+      enviar() {
+        return `📱 SMS a ${this.destinatario} | Mensaje: "${this.mensaje}"`;
+      }
+    }
+
+    class Push extends Notificacion {
+      constructor(destinatario, titulo, mensaje) {
+        super(destinatario);
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+      }
+
+      enviar() {
+        return `🔔 PUSH a ${this.destinatario} | Título: "${this.titulo}" | Mensaje: "${this.mensaje}"`;
+      }
+    }
+
+    function procesarNotificaciones(listaNotificaciones) {
+      const lines = [];
+      for (const notificacion of listaNotificaciones) {
+        // polimorfismo: se ejecuta la implementación concreta de cada subclase
+        lines.push(notificacion.enviar());
+      }
+      return lines.join("\n");
+    }
+
+    function demoNotificaciones() {
+      const lista = [
+        new Email("user@mail.com", "Bienvenido", "Gracias por registrarte"),
+        new SMS("+51999999999", "Tu código de verificación es 1234"),
+        new Push("usuario123", "Nueva oferta", "Tienes un descuento del 20%"),
+      ];
+
+      const salida = procesarNotificaciones(lista);
+      document.getElementById("log").textContent = salida;
+    }
+  </script>
+</body>
+</html>
