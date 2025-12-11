@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 8</title>
+</head>
+<body>
+  <h1>Pokémon Aleatorio</h1>
+  <button id="btnAleatorio">Obtener Pokémon</button>
+  <p id="resultado"></p>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 8
+
+    async function obtenerPokemonAleatorio() {
+      // Generar número aleatorio entre 1 y 898
+      const id = Math.floor(Math.random() * 898) + 1;
+
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+        if (!res.ok) {
+          throw new Error("Error en la solicitud: " + res.status);
+        }
+
+        const data = await res.json();
+        const resultado = document.getElementById("resultado");
+        resultado.textContent = `ID: ${data.id} | Nombre: ${data.name}`;
+        console.log("Pokémon aleatorio:", data.name, "(ID:", data.id + ")");
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    }
+
+    document.getElementById("btnAleatorio").addEventListener("click", obtenerPokemonAleatorio);
+  </script>
+</body>
+</html>

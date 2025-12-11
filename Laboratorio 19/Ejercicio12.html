@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 12</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    #card {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    img {
+      width: 150px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Estadísticas base de un Pokémon</h1>
+
+  <label for="pokemonInput">Ingrese nombre o ID:</label>
+  <input type="text" id="pokemonInput" placeholder="Ejemplo: pikachu o 25">
+  <button id="btnBuscar">Buscar</button>
+
+  <div id="card"></div>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 12
+
+    async function mostrarStats() {
+      const valor = document.getElementById("pokemonInput").value.trim().toLowerCase();
+      const card = document.getElementById("card");
+
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${valor}`);
+        if (!res.ok) {
+          throw new Error("Pokémon no encontrado. Código: " + res.status);
+        }
+
+        const data = await res.json();
+
+        // Extraer stats
+        const stats = data.stats.map(s => ({
+          nombre: s.stat.name,
+          valor: s.base_stat
+        }));
+
+        // Construir tabla
+        let tabla = "<table><tr><th>Estadística</th><th>Valor</th></tr>";
+        stats.forEach(s => {
+          tabla += `<tr><td>${s.nombre}</td><td>${s.valor}</td></tr>`;
+        });
+        tabla += "</table>";
+
+        card.innerHTML = `
+          <h2>${data.name.toUpperCase()}</h2>
+          <img src="${data.sprites.front_default}" alt="${data.name}">
+          ${tabla}
+        `;
+      } catch (error) {
+        card.innerHTML = "<h3>Error al obtener datos</h3>";
+        console.error("Error:", error.message);
+      }
+    }
+
+    document.getElementById("btnBuscar").addEventListener("click", mostrarStats);
+  </script>
+</body>
+</html>

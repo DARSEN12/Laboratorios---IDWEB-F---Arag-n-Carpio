@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 5</title>
+</head>
+<body>
+  <h1>Altura y Peso de Pikachu (async/await)</h1>
+  <p>Abre la consola para ver los resultados.</p>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 5
+
+    async function obtenerAlturaPeso() {
+      try {
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+
+        if (!res.ok) {
+          throw new Error("Error en la solicitud: " + res.status);
+        }
+
+        const data = await res.json();
+        console.log("Altura de Pikachu:", data.height);
+        console.log("Peso de Pikachu:", data.weight);
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    }
+
+    // Ejecutar automáticamente al cargar la página
+    obtenerAlturaPeso();
+  </script>
+</body>
+</html>

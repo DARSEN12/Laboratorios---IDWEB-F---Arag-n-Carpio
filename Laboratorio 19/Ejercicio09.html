@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 9</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    #card {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    img {
+      width: 150px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Buscador de Pokémon</h1>
+
+  <label for="pokemonId">Ingrese ID de Pokémon:</label>
+  <input type="number" id="pokemonId" placeholder="Ejemplo: 25">
+  <button id="btnBuscar">Buscar</button>
+
+  <div id="card"></div>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 9-
+
+    async function buscarPokemon() {
+      const id = document.getElementById("pokemonId").value;
+      const card = document.getElementById("card");
+
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        if (!res.ok) {
+          throw new Error("Pokémon no encontrado. Código: " + res.status);
+        }
+
+        const data = await res.json();
+        const habilidades = data.abilities.map(a => a.ability.name).join(", ");
+
+        card.innerHTML = `
+          <h2>${data.name.toUpperCase()}</h2>
+          <img src="${data.sprites.front_default}" alt="${data.name}">
+          <p><strong>ID:</strong> ${data.id}</p>
+          <p><strong>Peso:</strong> ${data.weight}</p>
+          <p><strong>Altura:</strong> ${data.height}</p>
+          <p><strong>Habilidades:</strong> ${habilidades}</p>
+        `;
+      } catch (error) {
+        card.innerHTML = "<h3>Error al obtener datos</h3>";
+        console.error("Error:", error.message);
+      }
+    }
+
+    document.getElementById("btnBuscar").addEventListener("click", buscarPokemon);
+  </script>
+</body>
+</html>

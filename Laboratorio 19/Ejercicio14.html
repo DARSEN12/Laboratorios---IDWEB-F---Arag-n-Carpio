@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 14</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      width: 180px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .card img {
+      width: 120px;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pokémon del 1 al 12</h1>
+  <div class="container" id="pokemons"></div>
+  <div class="buttons">
+    <button id="btnAnterior">Anterior</button>
+    <button id="btnSiguiente">Siguiente</button>
+  </div>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 14
+
+    let pokemons = [];
+    let indice = 0; // índice inicial para mostrar los grupos de 3
+
+    async function cargarPokemons() {
+      try {
+        for (let id = 1; id <= 12; id++) {
+          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          if (!res.ok) throw new Error("Error en la solicitud: " + res.status);
+          const data = await res.json();
+          pokemons.push({
+            id: data.id,
+            nombre: data.name,
+            imagen: data.sprites.front_default
+          });
+        }
+        mostrarPokemons();
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    }
+
+    function mostrarPokemons() {
+      const container = document.getElementById("pokemons");
+      container.innerHTML = "";
+
+      const grupo = pokemons.slice(indice, indice + 3);
+      grupo.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${p.nombre.toUpperCase()}</h3>
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <p><strong>ID:</strong> ${p.id}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      // Control de botones
+      document.getElementById("btnAnterior").disabled = indice === 0;
+      document.getElementById("btnSiguiente").disabled = indice + 3 >= pokemons.length;
+    }
+
+    document.getElementById("btnAnterior").addEventListener("click", () => {
+      if (indice > 0) {
+        indice -= 3;
+        mostrarPokemons();
+      }
+    });
+
+    document.getElementById("btnSiguiente").addEventListener("click", () => {
+      if (indice + 3 < pokemons.length) {
+        indice += 3;
+        mostrarPokemons();
+      }
+    });
+
+    // Ejecutar al cargar la página
+    cargarPokemons();
+  </script>
+</body>
+</html>

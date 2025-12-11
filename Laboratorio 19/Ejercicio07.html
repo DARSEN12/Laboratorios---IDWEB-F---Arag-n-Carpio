@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 7</title>
+</head>
+<body>
+  <h1>Primeros 20 Pokémon</h1>
+  <ul id="listaPokemons"></ul>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 7
+
+    async function listarPokemons() {
+      try {
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20");
+
+        if (!res.ok) {
+          throw new Error("Error en la solicitud: " + res.status);
+        }
+
+        const data = await res.json();
+        const lista = document.getElementById("listaPokemons");
+
+        // Mostrar cada Pokémon en la lista
+        data.results.forEach((pokemon, index) => {
+          const li = document.createElement("li");
+          li.textContent = `${index + 1}. ${pokemon.name}`;
+          lista.appendChild(li);
+        });
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    }
+
+    // Ejecutar automáticamente al cargar la página
+    listarPokemons();
+  </script>
+</body>
+</html>

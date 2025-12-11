@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 6</title>
+</head>
+<body>
+  <h1>URL de la imagen de Charizard</h1>
+  <p>Abre la consola para ver el resultado.</p>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 6
+
+    fetch("https://pokeapi.co/api/v2/pokemon/charizard")
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Error en la solicitud: " + res.status);
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log("URL de la imagen de Charizard:", data.sprites.front_default);
+      })
+      .catch(err => {
+        console.error("Error:", err.message);
+      });
+  </script>
+</body>
+</html>

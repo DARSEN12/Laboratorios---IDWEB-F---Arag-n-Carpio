@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 19 - Ejercicio 3</title>
+</head>
+<body>
+  <h1>Obtener nombre de Pokémon por ID</h1>
+
+  <label for="pokemonId">Ingrese ID de Pokémon:</label>
+  <input type="number" id="pokemonId" placeholder="Ejemplo: 25">
+  <button id="btnBuscar">Buscar</button>
+
+  <script>
+    // Laboratorio 19 - Ejercicio 3
+
+    function obtenerPokemonPorId() {
+      const id = document.getElementById("pokemonId").value;
+
+      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error("Pokémon no encontrado. Código: " + res.status);
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log("Nombre del Pokémon:", data.name);
+        })
+        .catch(err => {
+          console.error("Error:", err.message);
+        });
+    }
+
+    document.getElementById("btnBuscar").addEventListener("click", obtenerPokemonPorId);
+  </script>
+</body>
+</html>
