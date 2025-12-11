@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 18 - Ejercicio 11</title>
+</head>
+<body>
+  <h1>Validar Contraseña Fuerte</h1>
+
+  <label for="password">Ingrese contraseña:</label>
+  <input type="text" id="password">
+  <button id="btnValidar">Validar</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    // Laboratorio 18 - Ejercicio 11
+
+    // Expresión regular para contraseña fuerte
+    const regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+
+    function validarPassword() {
+      const password = document.getElementById("password").value;
+      const resultado = document.getElementById("resultado");
+
+      if (regexPassword.test(password)) {
+        resultado.textContent = "✅ Contraseña válida";
+        resultado.style.color = "green";
+      } else {
+        resultado.textContent = "❌ Contraseña inválida. Debe tener mínimo 8 caracteres, 1 mayúscula, 1 minúscula y 1 número.";
+        resultado.style.color = "red";
+      }
+    }
+
+    // Evento al hacer click en el botón
+    document.getElementById("btnValidar").addEventListener("click", validarPassword);
+  </script>
+</body>
+</html>

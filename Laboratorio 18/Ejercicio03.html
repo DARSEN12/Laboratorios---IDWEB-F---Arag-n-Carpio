@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 18 - Ejercicio 3</title>
+</head>
+<body>
+  <h1>Usuario desde API (Ejercicio 3)</h1>
+  <button id="btnCargar">Cargar usuario 10</button>
+
+  <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+  <p><strong>Username:</strong> <span id="username"></span></p>
+  <p><strong>Email:</strong> <span id="email"></span></p>
+
+  <script>
+    // Laboratorio 18 - Ejercicio 3
+
+    function cargarUsuario() {
+      fetch("https://jsonplaceholder.typicode.com/users/10")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Error en la petición: " + response.status);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Mostrar en consola
+          console.log("Nombre:", data.name);
+          console.log("Username:", data.username);
+          console.log("Email:", data.email);
+
+          // Manipular el DOM
+          document.getElementById("nombre").textContent = data.name;
+          document.getElementById("username").textContent = data.username;
+          document.getElementById("email").textContent = data.email;
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    }
+
+    // Evento al hacer click en el botón
+    document.getElementById("btnCargar").addEventListener("click", cargarUsuario);
+  </script>
+</body>
+</html>

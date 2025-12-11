@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 18 - Ejercicio 12</title>
+</head>
+<body>
+  <h1>Buscar URLs seguras en un texto</h1>
+
+  <textarea id="texto" rows="5" cols="50">
+Visita https://www.google.com o http://inseguro.com y también https://jsonplaceholder.typicode.com/users
+  </textarea>
+  <br>
+  <button id="btnBuscar">Buscar URLs seguras</button>
+
+  <h2>Resultados:</h2>
+  <ul id="listaURLs"></ul>
+
+  <script>
+    // Expresión regular para URLs seguras
+    const regexURL = /https:\/\/[^\s]+/g;
+
+    function buscarURLs() {
+      const texto = document.getElementById("texto").value;
+      const lista = document.getElementById("listaURLs");
+      lista.innerHTML = "";
+
+      const urls = texto.match(regexURL);
+
+      if (urls) {
+        urls.forEach(url => {
+          const li = document.createElement("li");
+          li.textContent = url;
+          lista.appendChild(li);
+        });
+      } else {
+        const li = document.createElement("li");
+        li.textContent = "No se encontraron URLs seguras.";
+        lista.appendChild(li);
+      }
+    }
+
+    document.getElementById("btnBuscar").addEventListener("click", buscarURLs);
+  </script>
+</body>
+</html>
