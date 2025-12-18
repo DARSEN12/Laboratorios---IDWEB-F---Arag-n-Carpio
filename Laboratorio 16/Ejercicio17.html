@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 17</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Persistencia con localStorage</h1>
+
+  <div id="perfil"></div>
+
+  <script>
+    // 1. Crear objeto usuario
+    const usuario = {
+      nombre: "Fredy",
+      correo: "fredy@example.com",
+      rol: "Estudiante"
+    };
+
+    // 2. Convertir a JSON y guardar en localStorage
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    // 3. Recuperar y convertir a objeto JS
+    const datosRecuperados = JSON.parse(localStorage.getItem("usuario"));
+
+    // 4. Mostrar en pantalla
+    const perfilDiv = document.getElementById("perfil");
+    perfilDiv.innerHTML = `
+      <p><strong>Nombre:</strong> ${datosRecuperados.nombre}</p>
+      <p><strong>Correo:</strong> ${datosRecuperados.correo}</p>
+      <p><strong>Rol:</strong> ${datosRecuperados.rol}</p>
+    `;
+  </script>
+</body>
+</html>

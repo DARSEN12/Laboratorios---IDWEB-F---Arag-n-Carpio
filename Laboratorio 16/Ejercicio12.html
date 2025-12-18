@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 12</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #caja {
+      width: 100px;
+      height: 100px;
+      background-color: steelblue;
+      position: relative;
+      margin-top: 20px;
+    }
+    /* Animación */
+    .mover {
+      animation: moverDerecha 2s forwards;
+    }
+    @keyframes moverDerecha {
+      from { left: 0; }
+      to { left: 300px; }
+    }
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Animación con DOM y CSS</h1>
+
+  <button id="btnMover">Mover</button>
+  <button id="btnReiniciar">Reiniciar</button>
+
+  <div id="caja"></div>
+
+  <script>
+    const caja = document.getElementById("caja");
+    const btnMover = document.getElementById("btnMover");
+    const btnReiniciar = document.getElementById("btnReiniciar");
+
+    // Botón para mover
+    btnMover.addEventListener("click", () => {
+      caja.classList.add("mover");
+    });
+
+    // Botón para reiniciar
+    btnReiniciar.addEventListener("click", () => {
+      caja.classList.remove("mover");
+      caja.style.left = "0"; // volver al inicio
+    });
+  </script>
+</body>
+</html>

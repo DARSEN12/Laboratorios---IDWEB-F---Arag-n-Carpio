@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 15</title>
+</head>
+<body>
+  <h1>Convertir JSON a objeto JS</h1>
+
+  <p id="resultado"></p>
+
+  <script>
+    // Declarar cadena JSON
+    const cadenaJSON = '{"nombre":"Ana","edad":25,"ciudad":"Arequipa"}';
+
+    // Convertir a objeto JS
+    const objeto = JSON.parse(cadenaJSON);
+
+    // Mostrar uno de sus valores en el DOM
+    const resultado = document.getElementById("resultado");
+    resultado.textContent = `Nombre: ${objeto.nombre}`;
+  </script>
+</body>
+</html>

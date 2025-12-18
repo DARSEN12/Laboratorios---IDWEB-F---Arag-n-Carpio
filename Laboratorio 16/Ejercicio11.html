@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 11</title>
+  <style>
+    ul {
+      margin-top: 20px;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      padding: 8px;
+      margin: 5px 0;
+      background-color: #f2f2f2;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      transition: background-color 0.3s;
+    }
+    li:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Delegación de eventos en lista</h1>
+
+  <ul id="miLista">
+    <li>Elemento 1</li>
+    <li>Elemento 2</li>
+    <li>Elemento 3</li>
+    <li>Elemento 4</li>
+  </ul>
+
+  <script>
+    const lista = document.getElementById("miLista");
+
+    // Delegación de eventos: el listener está en <ul>
+    lista.addEventListener("click", (event) => {
+      if (event.target.tagName === "LI") {
+        event.target.remove(); // elimina el <li> clicado
+      }
+    });
+  </script>
+</body>
+</html>

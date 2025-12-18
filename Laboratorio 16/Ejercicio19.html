@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 19</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Usuarios desde archivo JSON</h1>
+  <table id="tablaUsuarios">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Usar fetch para cargar archivo JSON externo
+    fetch("usuarios.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error al cargar el archivo JSON");
+        }
+        return response.json();
+      })
+      .then(usuarios => {
+        const tbody = document.querySelector("#tablaUsuarios tbody");
+
+        usuarios.forEach(usuario => {
+          const fila = document.createElement("tr");
+
+          const tdNombre = document.createElement("td");
+          tdNombre.textContent = usuario.nombre;
+
+          const tdCorreo = document.createElement("td");
+          tdCorreo.textContent = usuario.correo;
+
+          const tdRol = document.createElement("td");
+          tdRol.textContent = usuario.rol;
+
+          fila.appendChild(tdNombre);
+          fila.appendChild(tdCorreo);
+          fila.appendChild(tdRol);
+
+          tbody.appendChild(fila);
+        });
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  </script>
+</body>
+</html>

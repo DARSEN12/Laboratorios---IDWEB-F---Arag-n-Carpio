@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 16 - Ejercicio 3</title>
+</head>
+<body>
+    <h1>Ejemplo DOM con Eventos</h1>
+
+    <p id="miParrafo">Texto original</p>
+    <button id="btnCambiar">Cambiar texto</button>
+
+    <script>
+        // Seleccionar elementos
+        const parrafo = document.getElementById("miParrafo");
+        const boton = document.getElementById("btnCambiar");
+
+        // Evento click para cambiar el texto
+        boton.addEventListener("click", () => {
+            parrafo.textContent = "Texto cambiado";
+        });
+    </script>
+</body>
+</html>

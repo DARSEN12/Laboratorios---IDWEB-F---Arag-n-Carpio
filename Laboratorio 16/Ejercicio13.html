@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 13</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .acciones button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>CRUD de Usuarios</h1>
+
+  <!-- Formulario -->
+  <form id="formUsuario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="number" id="edad" placeholder="Edad">
+    <button type="submit">Agregar</button>
+  </form>
+
+  <!-- Tabla -->
+  <table id="tablaUsuarios">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById("formUsuario");
+    const tablaBody = document.querySelector("#tablaUsuarios tbody");
+
+    let usuarios = [];
+    let editIndex = null;
+
+    // Crear usuario
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const edad = document.getElementById("edad").value.trim();
+
+      if (nombre === "" || edad === "") {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      if (editIndex === null) {
+        // Crear nuevo usuario
+        usuarios.push({ nombre, edad });
+      } else {
+        // Actualizar usuario existente
+        usuarios[editIndex] = { nombre, edad };
+        editIndex = null;
+      }
+
+      form.reset();
+      renderTabla();
+    });
+
+    // Renderizar tabla
+    function renderTabla() {
+      tablaBody.innerHTML = "";
+      usuarios.forEach((usuario, index) => {
+        const fila = document.createElement("tr");
+
+        const tdNombre = document.createElement("td");
+        tdNombre.textContent = usuario.nombre;
+
+        const tdEdad = document.createElement("td");
+        tdEdad.textContent = usuario.edad;
+
+        const tdAcciones = document.createElement("td");
+        tdAcciones.classList.add("acciones");
+
+        const btnEditar = document.createElement("button");
+        btnEditar.textContent = "Editar";
+        btnEditar.dataset.index = index;
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.dataset.index = index;
+
+        tdAcciones.appendChild(btnEditar);
+        tdAcciones.appendChild(btnEliminar);
+
+        fila.appendChild(tdNombre);
+        fila.appendChild(tdEdad);
+        fila.appendChild(tdAcciones);
+
+        tablaBody.appendChild(fila);
+      });
+    }
+
+    // Delegación de eventos para acciones
+    tablaBody.addEventListener("click", (event) => {
+      if (event.target.tagName === "BUTTON") {
+        const index = event.target.dataset.index;
+
+        if (event.target.textContent === "Eliminar") {
+          usuarios.splice(index, 1);
+          renderTabla();
+        } else if (event.target.textContent === "Editar") {
+          const usuario = usuarios[index];
+          document.getElementById("nombre").value = usuario.nombre;
+          document.getElementById("edad").value = usuario.edad;
+          editIndex = index;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

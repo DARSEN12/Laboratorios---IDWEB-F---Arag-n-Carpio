@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 20</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    .post {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .post h3 {
+      margin: 0 0 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Consumir API pública con fetch()</h1>
+  <button id="btnCargar">Cargar publicaciones</button>
+  <div id="contenedor"></div>
+
+  <script>
+    const btnCargar = document.getElementById("btnCargar");
+    const contenedor = document.getElementById("contenedor");
+
+    btnCargar.addEventListener("click", () => {
+      contenedor.innerHTML = "<p>Cargando publicaciones...</p>";
+
+      fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Error al obtener datos de la API");
+          }
+          return response.json();
+        })
+        .then(posts => {
+          contenedor.innerHTML = ""; // limpiar mensaje de carga
+          posts.forEach(post => {
+            const div = document.createElement("div");
+            div.classList.add("post");
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = post.title;
+
+            const cuerpo = document.createElement("p");
+            cuerpo.textContent = post.body;
+
+            div.appendChild(titulo);
+            div.appendChild(cuerpo);
+            contenedor.appendChild(div);
+          });
+        })
+        .catch(error => {
+          contenedor.innerHTML = `<p style="color:red;">${error.message}</p>`;
+        });
+    });
+  </script>
+</body>
+</html>

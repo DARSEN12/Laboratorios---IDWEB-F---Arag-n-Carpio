@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 16 - Ejercicio 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        ul {
+            margin-top: 15px;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista dinámica</h1>
+
+    <input type="text" id="textoItem" placeholder="Escribe un elemento">
+    <button id="btnAgregar">Agregar</button>
+    <button id="btnEliminar">Eliminar último</button>
+
+    <ul id="miLista"></ul>
+
+    <script>
+        // Seleccionar elementos
+        const input = document.getElementById("textoItem");
+        const btnAgregar = document.getElementById("btnAgregar");
+        const btnEliminar = document.getElementById("btnEliminar");
+        const lista = document.getElementById("miLista");
+
+        // Evento para agregar elemento
+        btnAgregar.addEventListener("click", () => {
+            const valor = input.value.trim();
+            if (valor !== "") {
+                const li = document.createElement("li");
+                li.textContent = valor;
+                lista.appendChild(li);
+                input.value = ""; // limpiar campo
+            } else {
+                alert("Por favor escribe un texto antes de agregar.");
+            }
+        });
+
+        // Evento para eliminar último elemento
+        btnEliminar.addEventListener("click", () => {
+            if (lista.lastElementChild) {
+                lista.removeChild(lista.lastElementChild);
+            } else {
+                alert("La lista está vacía, no hay elementos para eliminar.");
+            }
+        });
+    </script>
+</body>
+</html>

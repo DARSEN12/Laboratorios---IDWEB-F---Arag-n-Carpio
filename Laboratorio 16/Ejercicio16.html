@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 16 - Ejercicio 16</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    ul {
+      margin-top: 15px;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Productos desde JSON</h1>
+  <ul id="listaProductos"></ul>
+
+  <script>
+    // 1. Crear arreglo de objetos
+    const productos = [
+      { nombre: "Laptop", precio: 3500 },
+      { nombre: "Mouse", precio: 80 },
+      { nombre: "Teclado", precio: 150 },
+      { nombre: "Monitor", precio: 1200 }
+    ];
+
+    // 2. Convertir a JSON
+    const productosJSON = JSON.stringify(productos);
+    console.log("JSON:", productosJSON);
+
+    // 3. Volver a objeto
+    const productosObj = JSON.parse(productosJSON);
+
+    // 4. Mostrar nombres en lista <ul>
+    const lista = document.getElementById("listaProductos");
+    productosObj.forEach(prod => {
+      const li = document.createElement("li");
+      li.textContent = prod.nombre;
+      lista.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 16 - Ejercicio 8</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validación de formulario</h1>
+
+    <form id="miFormulario">
+        <label>Nombre:</label>
+        <input type="text" id="nombre">
+        
+        <label>Correo:</label>
+        <input type="email" id="correo">
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const formulario = document.getElementById("miFormulario");
+
+        formulario.addEventListener("submit", (event) => {
+            event.preventDefault(); // evitar envío
+
+            // Eliminar mensajes previos
+            document.querySelectorAll(".error").forEach(e => e.remove());
+
+            let valido = true;
+
+            // Validar nombre
+            const nombre = document.getElementById("nombre");
+            if (nombre.value.trim() === "") {
+                const errorNombre = document.createElement("span");
+                errorNombre.textContent = "El nombre es obligatorio";
+                errorNombre.classList.add("error");
+                nombre.insertAdjacentElement("afterend", errorNombre);
+                valido = false;
+            }
+
+            // Validar correo
+            const correo = document.getElementById("correo");
+            if (correo.value.trim() === "") {
+                const errorCorreo = document.createElement("span");
+                errorCorreo.textContent = "El correo es obligatorio";
+                errorCorreo.classList.add("error");
+                correo.insertAdjacentElement("afterend", errorCorreo);
+                valido = false;
+            }
+
+            // Si todo está correcto
+            if (valido) {
+                alert("Formulario enviado correctamente ✅");
+            }
+        });
+    </script>
+</body>
+</html>
