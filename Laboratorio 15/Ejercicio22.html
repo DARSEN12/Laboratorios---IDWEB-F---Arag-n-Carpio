@@ -1,0 +1,41 @@
+<!-- Laboratorio 15 - Ejercicio 22-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 22</title>
+    <style>
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <p id="miParrafo">Este es el párrafo que se ocultará y mostrará.</p>
+    <button id="btnToggle">Ocultar/Mostrar párrafo</button>
+
+    <script>
+        // Seleccionar elementos
+        const parrafo = document.getElementById("miParrafo");
+        const boton = document.getElementById("btnToggle");
+
+        // Evento click para alternar visibilidad
+        boton.addEventListener("click", () => {
+            if (parrafo.style.display === "none") {
+                parrafo.style.display = "block"; // Mostrar
+            } else {
+                parrafo.style.display = "none";  // Ocultar
+            }
+        });
+    </script>
+</body>
+</html>

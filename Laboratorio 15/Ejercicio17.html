@@ -1,0 +1,45 @@
+<!-- Laboratorio 15 - Ejercicio 17-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 17</title>
+    <style>
+        #contenedor {
+            border: 1px solid #333;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <!-- Contenedor con párrafos desordenados -->
+    <div id="contenedor">
+        <p>Melgar</p>
+        <p>Barcelona</p>
+        <p>Real Madrid</p>
+        <p>Liverpool</p>
+        <p>Boca Juniors</p>
+    </div>
+
+    <script>
+        // Seleccionar el contenedor
+        const contenedor = document.getElementById("contenedor");
+
+        // Obtener todos los <p> dentro del contenedor como array
+        const parrafos = Array.from(contenedor.querySelectorAll("p"));
+
+        // Ordenar alfabéticamente según su texto
+        parrafos.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+        // Reinsertar los párrafos en orden dentro del contenedor
+        parrafos.forEach(p => contenedor.appendChild(p));
+    </script>
+</body>
+</html>

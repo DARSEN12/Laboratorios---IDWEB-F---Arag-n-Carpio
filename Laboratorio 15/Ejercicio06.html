@@ -1,0 +1,39 @@
+<!-- Laboratorio 15 - Ejercicio 6-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 6</title>
+    <style>
+        .resaltado {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <ul>
+        <li>Elemento 1</li>
+        <li class="oculto">Elemento 2</li>
+        <li>Elemento 3</li>
+        <li class="oculto">Elemento 4</li>
+        <li>Elemento 5</li>
+    </ul>
+
+    <script>
+        // Seleccionar todos los <li>
+        const items = document.querySelectorAll("li");
+
+        // Agregar clase "resaltado" y eliminar "oculto" si existe
+        items.forEach(li => {
+            li.classList.add("resaltado");
+            li.classList.remove("oculto");
+        });
+    </script>
+</body>
+</html>

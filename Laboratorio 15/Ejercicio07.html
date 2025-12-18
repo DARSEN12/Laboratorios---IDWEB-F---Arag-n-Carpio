@@ -1,0 +1,28 @@
+<!-- Laboratorio 15 - Ejercicio 7-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 7</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <ul id="miLista">
+        <li>Elemento A</li>
+        <li>Elemento B</li>
+        <li>Elemento C</li>
+        <li>Elemento D</li>
+    </ul>
+
+    <script>
+        // Seleccionar el <ul> por su id
+        const lista = document.getElementById("miLista");
+
+        // Recorrer cada hijo <li> con for...of
+        for (let item of lista.children) {
+            console.log(item.textContent);
+        }
+    </script>
+</body>
+</html>

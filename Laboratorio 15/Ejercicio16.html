@@ -1,0 +1,31 @@
+<!-- Laboratorio 15 - Ejercicio 16-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 16</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+        <li>Elemento 5 (este se moverá)</li>
+    </ul>
+
+    <script>
+        // Seleccionar el primer <ul>
+        const lista = document.querySelector("ul");
+
+        // Seleccionar el último <li>
+        const ultimoItem = lista.lastElementChild;
+
+        // Moverlo al inicio de la lista
+        lista.insertBefore(ultimoItem, lista.firstElementChild);
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- Laboratorio 15 - Ejercicio 13-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 13</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <p>Párrafo 1</p>
+    <p>Párrafo 2</p>
+    <p>Párrafo 3 (este será eliminado)</p>
+
+    <script>
+        // Seleccionar todos los párrafos
+        const parrafos = document.querySelectorAll("p");
+
+        // Seleccionar el último <p>
+        const ultimoParrafo = parrafos[parrafos.length - 1];
+
+        // Eliminarlo del DOM
+        ultimoParrafo.remove();
+    </script>
+</body>
+</html>

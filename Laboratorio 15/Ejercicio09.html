@@ -1,0 +1,23 @@
+<!-- Laboratorio 15 - Ejercicio 9-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 9</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <p>Párrafo original 1</p>
+    <p>Párrafo original 2</p>
+
+    <script>
+        // Crear un nuevo elemento <p>
+        const nuevoParrafo = document.createElement("p");
+        nuevoParrafo.textContent = "Elemento insertado con JS";
+
+        // Agregarlo al final del body
+        document.body.appendChild(nuevoParrafo);
+    </script>
+</body>
+</html>

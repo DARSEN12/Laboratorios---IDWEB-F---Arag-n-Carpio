@@ -1,0 +1,34 @@
+<!-- Laboratorio 15 - Ejercicio 14-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 14</title>
+    <style>
+        #contenido {
+            border: 1px solid #333;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <!-- Contenedor con contenido inicial -->
+    <div id="contenido">
+        <p>Párrafo dentro del contenedor</p>
+        <p>Otro párrafo dentro del contenedor</p>
+        <p>Más contenido dentro del contenedor</p>
+    </div>
+
+    <script>
+        // Seleccionar el contenedor por id
+        const contenedor = document.getElementById("contenido");
+
+        // Vaciar su contenido sin eliminar el contenedor
+        contenedor.innerHTML = "";
+    </script>
+</body>
+</html>

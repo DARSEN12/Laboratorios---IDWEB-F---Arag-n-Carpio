@@ -1,0 +1,24 @@
+<!-- Laboratorio 15 - Ejercicio 5-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 5</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <img src="imagen_original.jpg" alt="Imagen original">
+
+    <script>
+        // Seleccionar la primera imagen del documento
+        const primeraImagen = document.querySelector("img");
+
+        // Cambiar atributos src y alt
+        primeraImagen.setAttribute("src", "imagen_nueva.jpg");
+        primeraImagen.setAttribute("alt", "Imagen actualizada dinámicamente");
+
+        console.log("Atributos actualizados:", primeraImagen.src, primeraImagen.alt);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!-- Laboratorio 15 - Ejercicio 18-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 18</title>
+    <style>
+        section {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <section>
+        <h2>Sección 1</h2>
+        <p>Contenido de la primera sección.</p>
+    </section>
+
+    <section>
+        <h2>Sección 2</h2>
+        <p>Contenido de la segunda sección.</p>
+    </section>
+
+    <section>
+        <h2>Sección 3</h2>
+        <p>Contenido de la tercera sección.</p>
+    </section>
+
+    <script>
+        // Seleccionar todas las secciones
+        const secciones = document.querySelectorAll("section");
+
+        // Agregar atributo data-index con la posición
+        secciones.forEach((sec, index) => {
+            sec.setAttribute("data-index", index);
+            console.log(`Sección ${index} → data-index = ${sec.getAttribute("data-index")}`);
+        });
+    </script>
+</body>
+</html>

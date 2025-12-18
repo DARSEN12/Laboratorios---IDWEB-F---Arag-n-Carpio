@@ -1,0 +1,26 @@
+<!-- Laboratorio 15 - Ejercicio 12-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 12</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <p id="parrafo1">Este es el párrafo original.</p>
+    <p>Otro párrafo de prueba.</p>
+
+    <script>
+        // Seleccionar el párrafo a reemplazar
+        const parrafo = document.getElementById("parrafo1");
+
+        // Crear un nuevo <div>
+        const nuevoDiv = document.createElement("div");
+        nuevoDiv.textContent = "Párrafo reemplazado";
+
+        // Reemplazar el párrafo por el div
+        parrafo.replaceWith(nuevoDiv);
+    </script>
+</body>
+</html>

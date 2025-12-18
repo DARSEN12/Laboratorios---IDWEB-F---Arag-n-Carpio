@@ -1,0 +1,43 @@
+<!-- Laboratorio 15 - Ejercicio 15-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 15</title>
+    <style>
+        article {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <main>
+        <article>
+            <h2>Artículo original</h2>
+            <p>Este es el contenido del primer artículo.</p>
+        </article>
+
+        <article>
+            <h2>Otro artículo</h2>
+            <p>Contenido adicional.</p>
+        </article>
+    </main>
+
+    <script>
+        // Seleccionar el primer <article>
+        const primerArticulo = document.querySelector("article");
+
+        // Clonar el artículo con todo su contenido interno
+        const clon = primerArticulo.cloneNode(true);
+
+        // Insertar el clon al final del <main>
+        const main = document.querySelector("main");
+        main.appendChild(clon);
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!-- Laboratorio 15 - Ejercicio 4-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 4</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <p>Este es el primer párrafo original.</p>
+    <p>Este es el segundo párrafo segundo original.</p>
+    <p>Este es el tercer párrafo tercer original.</p>
+
+    <script>
+        // Seleccionar todos los párrafos <p>
+        const parrafos = document.querySelectorAll("p");
+
+        // Cambiar su contenido
+        parrafos.forEach(p => {
+            p.textContent = "Texto actualizado dinámicamente";
+        });
+    </script>
+</body>
+</html>

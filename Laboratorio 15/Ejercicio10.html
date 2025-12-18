@@ -1,0 +1,26 @@
+<!-- Laboratorio 15 - Ejercicio 10-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 10</title>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+    <p>Primer párrafo original</p>
+    <p>Segundo párrafo original</p>
+
+    <script>
+        // Crear un nuevo elemento <h3>
+        const nuevoH3 = document.createElement("h3");
+        nuevoH3.textContent = "Subtítulo insertado dinámicamente";
+
+        // Seleccionar el primer <p>
+        const primerParrafo = document.querySelector("p");
+
+        // Insertar el <h3> antes del primer <p>
+        document.body.insertBefore(nuevoH3, primerParrafo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!-- Laboratorio 15 - Ejercicio 21-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 21</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <script>
+        // Crear la tabla
+        const tabla = document.createElement("table");
+
+        // Crear 3 filas y 3 columnas
+        for (let fila = 1; fila <= 3; fila++) {
+            const tr = document.createElement("tr");
+
+            for (let col = 1; col <= 3; col++) {
+                const td = document.createElement("td");
+                td.textContent = `Celda ${fila},${col}`;
+                tr.appendChild(td);
+            }
+
+            tabla.appendChild(tr);
+        }
+
+        // Insertar la tabla en el body
+        document.body.appendChild(tabla);
+    </script>
+</body>
+</html>

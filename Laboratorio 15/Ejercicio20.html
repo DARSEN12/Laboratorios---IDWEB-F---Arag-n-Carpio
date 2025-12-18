@@ -1,0 +1,53 @@
+<!-- Laboratorio 15 - Ejercicio 20-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 15 - Ejercicio 20</title>
+    <style>
+        form {
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo DOM</h1>
+
+    <!-- Formulario -->
+    <form id="miFormulario">
+        <input type="text" id="campoTexto" placeholder="Escribe algo aquí">
+        <button type="button" id="btnMostrar">Mostrar texto</button>
+    </form>
+
+    <script>
+        // Seleccionar elementos
+        const campoTexto = document.getElementById("campoTexto");
+        const boton = document.getElementById("btnMostrar");
+
+        // Evento click en el botón
+        boton.addEventListener("click", () => {
+            const valor = campoTexto.value.trim();
+
+            if (valor !== "") {
+                // Crear nuevo párrafo
+                const nuevoParrafo = document.createElement("p");
+                nuevoParrafo.textContent = valor;
+
+                // Insertar en el body
+                document.body.appendChild(nuevoParrafo);
+
+                // Limpiar campo
+                campoTexto.value = "";
+            } else {
+                alert("Por favor escribe algo antes de mostrar.");
+            }
+        });
+    </script>
+</body>
+</html>
