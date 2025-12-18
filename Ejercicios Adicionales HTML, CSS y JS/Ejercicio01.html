@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio adicional 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      transition: background-color 0.5s ease;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: steelblue;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cambiar color de fondo</h1>
+  <button id="btnColor">Cambiar color</button>
+
+  <script>
+    const btn = document.getElementById("btnColor");
+
+    // Función para generar color aleatorio en formato hex
+    function colorAleatorio() {
+      const letras = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letras[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Evento click para cambiar color
+    btn.addEventListener("click", () => {
+      document.body.style.backgroundColor = colorAleatorio();
+    });
+  </script>
+</body>
+</html>

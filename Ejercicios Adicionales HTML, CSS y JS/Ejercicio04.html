@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio adicional 4</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      text-align: center;
+    }
+    #imagenGrande {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+      border: 2px solid #333;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .miniaturas {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .miniaturas img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      transition: border 0.3s;
+    }
+    .miniaturas img:hover {
+      border: 2px solid steelblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galería de imágenes</h1>
+
+  <!-- Imagen grande -->
+  <img id="imagenGrande" src="https://picsum.photos/id/1015/400/250" alt="Imagen grande">
+
+  <!-- Miniaturas -->
+  <div class="miniaturas">
+    <img src="https://picsum.photos/id/1015/400/250" alt="Miniatura 1">
+    <img src="https://picsum.photos/id/1025/400/250" alt="Miniatura 2">
+    <img src="https://picsum.photos/id/1035/400/250" alt="Miniatura 3">
+    <img src="https://picsum.photos/id/1045/400/250" alt="Miniatura 4">
+  </div>
+
+  <script>
+    const imagenGrande = document.getElementById("imagenGrande");
+    const miniaturas = document.querySelectorAll(".miniaturas img");
+
+    miniaturas.forEach(miniatura => {
+      miniatura.addEventListener("click", () => {
+        imagenGrande.src = miniatura.src;
+      });
+    });
+  </script>
+</body>
+</html>

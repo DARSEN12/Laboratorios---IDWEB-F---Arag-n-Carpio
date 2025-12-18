@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio adicional 3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: steelblue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .dropdown button:hover {
+      background-color: darkblue;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 1;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Menú desplegable interactivo</h1>
+
+  <div class="dropdown">
+    <button id="btnMenu">Menú</button>
+    <div id="menuOpciones" class="dropdown-content">
+      <a href="#">Opción 1</a>
+      <a href="#">Opción 2</a>
+      <a href="#">Opción 3</a>
+    </div>
+  </div>
+
+  <script>
+    const btnMenu = document.getElementById("btnMenu");
+    const menuOpciones = document.getElementById("menuOpciones");
+
+    // Mostrar/ocultar menú al hacer clic en el botón
+    btnMenu.addEventListener("click", () => {
+      menuOpciones.classList.toggle("show");
+    });
+
+    // Cerrar menú al hacer clic fuera
+    window.addEventListener("click", (event) => {
+      if (!event.target.matches("#btnMenu")) {
+        if (menuOpciones.classList.contains("show")) {
+          menuOpciones.classList.remove("show");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
