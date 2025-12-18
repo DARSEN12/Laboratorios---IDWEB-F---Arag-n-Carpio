@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 6</title>
+</head>
+<body>
+  <h1>Ejercicio 6 - Validar Edad</h1>
+
+  <script>
+    function validarEdad(edad) {
+      if (isNaN(edad) || edad < 0) {
+        throw new Error("Edad inválida");
+      }
+      return "Edad válida: " + edad;
+    }
+
+    try {
+      console.log(validarEdad(-5));   // Provoca error
+    } catch (e) {
+      console.log("Error capturado:", e.message);
+    }
+
+    try {
+      console.log(validarEdad("hola")); // Provoca error
+    } catch (e) {
+      console.log("Error capturado:", e.message);
+    }
+
+    try {
+      console.log(validarEdad(25));   // Correcto
+    } catch (e) {
+      console.log("Error capturado:", e.message);
+    }
+  </script>
+</body>
+</html>

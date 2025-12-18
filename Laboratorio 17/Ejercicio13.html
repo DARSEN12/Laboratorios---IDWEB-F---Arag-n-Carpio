@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 13</title>
+</head>
+<body>
+  <h1>Ejercicio 13 - cargarMensaje con Promesa</h1>
+
+  <script>
+    function cargarMensaje() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Mensaje cargado");
+        }, 1000);
+      });
+    }
+
+    // Uso de la promesa
+    cargarMensaje()
+      .then(mensaje => {
+        console.log(mensaje);
+        document.body.innerHTML += `<p>${mensaje}</p>`;
+      })
+      .catch(error => {
+        console.log("Error:", error.message);
+      });
+  </script>
+</body>
+</html>

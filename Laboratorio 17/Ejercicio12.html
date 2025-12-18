@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 12</title>
+</head>
+<body>
+  <h1>Ejercicio 12 - procesarLista con callback</h1>
+
+  <script>
+    function procesarLista(lista, callback) {
+      let procesados = 0;
+
+      lista.forEach(num => {
+        const tiempo = Math.floor(Math.random() * 1000) + 500; // entre 500 y 1500 ms
+        setTimeout(() => {
+          console.log("Procesando", num, "...");
+          procesados++;
+          if (procesados === lista.length) {
+            callback("Proceso completado");
+          }
+        }, tiempo);
+      });
+    }
+
+    // Prueba
+    const numeros = [1, 2, 3, 4, 5];
+    procesarLista(numeros, (mensajeFinal) => {
+      console.log(mensajeFinal);
+      document.body.innerHTML += `<p>${mensajeFinal}</p>`;
+    });
+  </script>
+</body>
+</html>

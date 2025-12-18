@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 4</title>
+</head>
+<body>
+  <h1>Ejercicio 4 - SyntaxError con JSON.parse</h1>
+
+  <script>
+    try {
+      // Provocamos un SyntaxError al intentar parsear JSON inválido
+      let texto = "{nombre: 'Juan'}"; // JSON inválido (faltan comillas en la clave)
+      let obj = JSON.parse(texto);
+      console.log("Objeto:", obj);
+    } catch (e) {
+      // Mostrar el tipo de error y el mensaje
+      console.log("Error capturado:");
+      console.log("Nombre del error:", e.name);
+      console.log("Mensaje:", e.message);
+    }
+  </script>
+</body>
+</html>

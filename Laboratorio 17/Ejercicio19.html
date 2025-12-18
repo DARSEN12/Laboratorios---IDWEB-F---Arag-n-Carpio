@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 19</title>
+</head>
+<body>
+  <h1>Ejercicio 19 - dividirAsync con Async/Await</h1>
+
+  <script>
+    function dividirAsync(a, b) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (b === 0) {
+            reject(new Error("No se puede dividir entre cero"));
+          } else {
+            resolve(a / b);
+          }
+        }, 1500);
+      });
+    }
+
+    async function ejecutarDivision() {
+      try {
+        const resultado = await dividirAsync(10, 2);
+        console.log("Resultado:", resultado);
+      } catch (error) {
+        console.log("Error:", error.message);
+      }
+
+      try {
+        const resultadoError = await dividirAsync(10, 0);
+        console.log("Resultado:", resultadoError);
+      } catch (error) {
+        console.log("Error:", error.message);
+      }
+    }
+
+    // Ejecutar
+    ejecutarDivision();
+  </script>
+</body>
+</html>

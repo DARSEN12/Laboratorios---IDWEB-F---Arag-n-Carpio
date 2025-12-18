@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 5</title>
+</head>
+<body>
+  <h1>Ejercicio 5 - try/catch/finally</h1>
+
+  <script>
+    try {
+      // Provocamos un ReferenceError al usar una variable no definida
+      console.log(variableInexistente);
+    } catch (e) {
+      // Mensaje en caso de error
+      console.log("falló");
+    } finally {
+      // Mensaje que siempre se ejecuta
+      console.log("siempre se ejecuta");
+    }
+  </script>
+</body>
+</html>

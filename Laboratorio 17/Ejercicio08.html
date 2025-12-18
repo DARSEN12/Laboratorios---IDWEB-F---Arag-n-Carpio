@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 8</title>
+</head>
+<body>
+  <h1>Ejercicio 8 - Propagación de errores</h1>
+
+  <script>
+    function nivel2() {
+      try {
+        console.log(x); // Provoca ReferenceError
+      } catch (e) {
+        console.log("Nivel 2 atrapó el error:", e.message);
+        throw e; // Re-lanzar el error
+      }
+    }
+
+    function nivel1() {
+      try {
+        nivel2();
+      } catch (e) {
+        console.log("Nivel 1 recibió el error:", e.message);
+        throw e; // Re-lanzar el error
+      }
+    }
+
+    try {
+      nivel1();
+    } catch (e) {
+      console.log("ERROR FINAL capturado en el nivel superior:", e.message);
+    }
+  </script>
+</body>
+</html>

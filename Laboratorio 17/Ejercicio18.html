@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 18</title>
+</head>
+<body>
+  <h1>Ejercicio 18 - cargarUsuario con Async/Await</h1>
+
+  <script>
+    function cargarUsuario() {
+      return new Promise((resolve) => {
+        const tiempo = Math.floor(Math.random() * 700) + 800; // entre 800 y 1500 ms
+        setTimeout(() => {
+          const usuario = { id: 1, nombre: "Juancito" };
+          resolve(usuario);
+        }, tiempo);
+      });
+    }
+
+    async function mostrarUsuario() {
+      const usuario = await cargarUsuario();
+      console.log(`Usuario cargado: ${usuario.nombre} (ID: ${usuario.id})`);
+      document.body.innerHTML += `<p>Usuario cargado: ${usuario.nombre} (ID: ${usuario.id})</p>`;
+    }
+
+    // Ejecutar
+    mostrarUsuario();
+  </script>
+</body>
+</html>

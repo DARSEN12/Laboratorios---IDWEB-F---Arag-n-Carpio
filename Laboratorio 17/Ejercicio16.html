@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 16</title>
+</head>
+<body>
+  <h1>Ejercicio 16 - procesarLista con Promesas</h1>
+
+  <script>
+    function procesarLista(lista) {
+      return new Promise((resolve) => {
+        let procesados = 0;
+
+        lista.forEach(num => {
+          const tiempo = Math.floor(Math.random() * 1000) + 500; // entre 500 y 1500 ms
+          setTimeout(() => {
+            console.log("Procesando", num, "...");
+            procesados++;
+            if (procesados === lista.length) {
+              resolve("Proceso completado");
+            }
+          }, tiempo);
+        });
+      });
+    }
+
+    // Uso de la promesa
+    procesarLista([1, 2, 3, 4, 5])
+      .then(mensaje => {
+        console.log(mensaje);
+        document.body.innerHTML += `<p>${mensaje}</p>`;
+      });
+  </script>
+</body>
+</html>

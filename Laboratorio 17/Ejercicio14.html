@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 14</title>
+</head>
+<body>
+  <h1>Ejercicio 14 - cargarUsuario con Promesa</h1>
+
+  <script>
+    function cargarUsuario() {
+      return new Promise((resolve) => {
+        const tiempo = Math.floor(Math.random() * 700) + 800; // entre 800 y 1500 ms
+        setTimeout(() => {
+          const usuario = { id: 1, nombre: "Juancito" };
+          resolve(usuario);
+        }, tiempo);
+      });
+    }
+
+    // Uso de la promesa
+    cargarUsuario()
+      .then(usuario => {
+        console.log(`Usuario cargado: ${usuario.nombre} (ID: ${usuario.id})`);
+        document.body.innerHTML += `<p>Usuario cargado: ${usuario.nombre} (ID: ${usuario.id})</p>`;
+      })
+      .catch(error => {
+        console.log("Error:", error.message);
+      });
+  </script>
+</body>
+</html>

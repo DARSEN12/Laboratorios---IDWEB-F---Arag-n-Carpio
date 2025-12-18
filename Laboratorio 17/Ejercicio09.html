@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 9</title>
+</head>
+<body>
+  <h1>Ejercicio 9 - Callback con setTimeout</h1>
+
+  <script>
+    function cargarMensaje(callback) {
+      setTimeout(() => {
+        callback("Mensaje cargado");
+      }, 1000);
+    }
+
+    // Uso de la función con callback
+    cargarMensaje((mensaje) => {
+      console.log(mensaje);
+      document.body.innerHTML += `<p>${mensaje}</p>`;
+    });
+  </script>
+</body>
+</html>

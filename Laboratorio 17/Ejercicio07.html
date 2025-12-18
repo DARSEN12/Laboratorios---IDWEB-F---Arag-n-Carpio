@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 7</title>
+</head>
+<body>
+  <h1>Ejercicio 7 - TypeError con instanceof</h1>
+
+  <script>
+    try {
+      let x = null;
+      console.log(x.nombre); // Provoca TypeError
+    } catch (e) {
+      if (e instanceof TypeError) {
+        console.log("TypeError capturado:", e.message);
+      } else {
+        console.log("Otro tipo de error:", e.message);
+      }
+    }
+  </script>
+</body>
+</html>

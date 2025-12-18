@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 17</title>
+</head>
+<body>
+  <h1>Ejercicio 17 - cargarMensaje con Async/Await</h1>
+
+  <script>
+    function cargarMensaje() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Mensaje cargado");
+        }, 1000);
+      });
+    }
+
+    async function mostrarMensaje() {
+      const mensaje = await cargarMensaje();
+      console.log(mensaje);
+      document.body.innerHTML += `<p>${mensaje}</p>`;
+    }
+
+    // Ejecutar
+    mostrarMensaje();
+  </script>
+</body>
+</html>

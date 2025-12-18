@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 20</title>
+</head>
+<body>
+  <h1>Ejercicio 20 - procesarLista con Async/Await</h1>
+
+  <script>
+    function procesarNumero(num) {
+      return new Promise((resolve) => {
+        const tiempo = Math.floor(Math.random() * 1000) + 500; // entre 500 y 1500 ms
+        setTimeout(() => {
+          console.log("Procesando", num, "...");
+          resolve();
+        }, tiempo);
+      });
+    }
+
+    async function procesarLista(lista) {
+      for (const num of lista) {
+        await procesarNumero(num);
+      }
+      console.log("Proceso completado");
+      document.body.innerHTML += `<p>Proceso completado</p>`;
+    }
+
+    // Ejecutar
+    procesarLista([1, 2, 3, 4, 5]);
+  </script>
+</body>
+</html>

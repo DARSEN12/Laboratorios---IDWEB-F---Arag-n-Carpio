@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio 17 - Ejercicio 11</title>
+</head>
+<body>
+  <h1>Ejercicio 11 - dividirAsync con callback</h1>
+
+  <script>
+    function dividirAsync(a, b, callback) {
+      setTimeout(() => {
+        if (b === 0) {
+          callback(new Error("No se puede dividir entre cero"), null);
+        } else {
+          callback(null, a / b);
+        }
+      }, 1500);
+    }
+
+    // Prueba correcta
+    dividirAsync(10, 2, (error, resultado) => {
+      if (error) {
+        console.log("Error:", error.message);
+      } else {
+        console.log("Resultado:", resultado);
+      }
+    });
+
+    // Prueba con error
+    dividirAsync(10, 0, (error, resultado) => {
+      if (error) {
+        console.log("Error:", error.message);
+      } else {
+        console.log("Resultado:", resultado);
+      }
+    });
+  </script>
+</body>
+</html>
